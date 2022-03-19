@@ -1,0 +1,2 @@
+zstyle ':prezto:load' pmodule 'environment' 'git' 'prompt'
+zstyle ':prezto:module:prompt' theme 'powerlevel10k'

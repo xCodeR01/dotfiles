@@ -1,0 +1,11 @@
+[user]
+pinned=/usr/share/applications/thunar.desktop;/home/raven/.local/share/applications/appimagekit-joplin.desktop;/usr/share/applications/code.desktop;/usr/local/share/applications/kitty.desktop;/usr/share/applications/brave-browser.desktop;
+indicatorStyle=2
+indicatorOrientation=0
+indicatorColor=rgb(255,163,72)
+inactiveColor=rgb(76,166,230)
+showPreviews=true
+onlyDisplayScreen=false
+onlyDisplayVisible=false
+noWindowsListIfSingle=false
+showWindowCount=false

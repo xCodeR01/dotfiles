@@ -1,0 +1,7 @@
+[user]
+	email = ravenredstain@outlook.com
+	name = Raven Redstain
+[core]
+	editor = code
+[init]
+	defaultBranch = master
