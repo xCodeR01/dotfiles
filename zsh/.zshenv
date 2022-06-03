@@ -17,3 +17,6 @@ export PATH=$PATH:$HOME/.local/share/solana/install/active_release/bin
 export PATH=$PATH:$HOME/.yarn/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/usr/local/jdk-17.0.2/bin
+
+# added by third party packages
+. "$CARGO_HOME/env"
