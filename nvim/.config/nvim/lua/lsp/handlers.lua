@@ -16,7 +16,7 @@ M.setup = function()
   local config = {
     virtual_text = false, -- disable virtual text
     signs = {
-      active = signs,  -- show signs
+      active = signs, -- show signs
     },
     update_in_insert = true,
     underline = true,
@@ -52,7 +52,7 @@ local function lsp_highlight_document(client)
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
       augroup END
-    ]],
+    ]] ,
       false
     )
   end

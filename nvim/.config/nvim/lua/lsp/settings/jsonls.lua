@@ -141,6 +141,14 @@ local schemas = {
     },
   },
   {
+    description = "Sumneko configuration file",
+    fileMatch = {
+      ".luarc.json"
+    },
+    url = "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+
+  },
+  {
     description = "Packer template JSON configuration",
     fileMatch = {
       "packer.json",

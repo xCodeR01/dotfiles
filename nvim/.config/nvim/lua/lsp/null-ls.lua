@@ -12,7 +12,7 @@ null_ls.setup({
 	sources = {
 		formatting.prettier,
 		formatting.black.with({ extra_args = { "--fast" } }),
-        -- diagnostics.flake8
+		-- diagnostics.flake8
 		formatting.stylua,
 	},
 })
