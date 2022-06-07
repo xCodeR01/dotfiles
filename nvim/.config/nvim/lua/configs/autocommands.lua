@@ -7,11 +7,6 @@ vim.cmd [[
     autocmd FileType qf set nobuflisted
   augroup end
 
-  augroup _colorscheme
-    autocmd!
-    autocmd VimEnter * hi Normal ctermbg=none guibg=none
-  augroup end
-
   augroup _git
     autocmd!
     autocmd FileType gitcommit setlocal wrap
