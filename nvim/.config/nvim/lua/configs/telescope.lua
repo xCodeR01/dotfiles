@@ -13,6 +13,7 @@ telescope.setup {
     prompt_prefix = " ",
     selection_caret = " ",
     path_display = { "smart" },
+    file_ignore_patterns = { "node_modules" },
 
     mappings = {
       i = {
@@ -45,7 +46,6 @@ telescope.setup {
         ["<C-l>"] = actions.complete_tag,
         ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
       },
-
       n = {
         ["<esc>"] = actions.close,
         ["<CR>"] = actions.select_default,
