@@ -2,8 +2,8 @@
 	email = ravenredstain@outlook.com
 	name = Raven Redstain
 [core]
-	editor = code
+	editor = code --wait
 [init]
 	defaultBranch = master
 [credential]
-	helper = cache --timeout=3600
+	helper = store
