@@ -1,0 +1,17 @@
+swipe:
+  3:
+    lefSwitcht:
+      command: "xdotool key alt+Tab" # History forward
+    right:
+      command: "xdotool key alt+shift+Tab" # History back
+    up:
+      command: "xdotool key super" # Activity
+    down:
+      command: "xdotool key ctrl+alt+d" # minimize all windows
+      threshold: 0.75
+      interval: 0.5
+pinch:
+  in:
+    command: "xdotool keydown ctrl click 4 keyup ctrl" # Zoom in
+  out:
+    command: "xdotool keydown ctrl click 5 keyup ctrl" # Zoom out
