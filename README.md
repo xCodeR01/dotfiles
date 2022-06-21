@@ -1,7 +1,7 @@
 # dotfiles
 
 
-`git clone --recursive https://github.com/xCodeR01/dotfiles.git ~/dotfiles`
+`git clone --recursive https://github.com/xCodeR01/dotfiles.git ~/Dotfiles`
 
 make sure stow is installed `sudo apt install stow` or `sudo dnf install stow`
 
