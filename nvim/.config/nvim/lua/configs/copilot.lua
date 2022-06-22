@@ -6,4 +6,3 @@ vim.cmd [[imap <silent><script><expr> <C-l> copilot#Accept()]]
 vim.g.copilot_filetypes = {
   ["xml"] = false
 }
-

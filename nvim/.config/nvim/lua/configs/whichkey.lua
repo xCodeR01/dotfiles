@@ -79,7 +79,8 @@ local opts = {
 }
 
 local mappings = {
-  ["/"] = { "<cmd>lua require(\"Comment.api\").toggle_current_linewise()<CR>", "Comment" },
+
+  ["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment" },
   ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
   ["b"] = {
     "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
@@ -96,6 +97,19 @@ local mappings = {
   },
   ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
   ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
+
+  d = {
+    name = "DAP",
+    b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
+    c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
+    i = { "<cmd>lua require'dap'.step_into()<cr>", "Step In" },
+    o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
+    O = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
+    r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle REPL" },
+    l = { "<cmd>lua require'dap'.run_last()<cr>", "Run Last" },
+    u = { "<cmd>lua require'dapui'.toggle()<cr>", "Toggle DAP UI" },
+    t = { "<cmd>lua require'dap'.terminate()<cr>", "Terminate" },
+  },
 
   p = {
     name = "Packer",

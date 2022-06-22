@@ -19,3 +19,4 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/usr/local/jdk-17.0.2/bin
 
 # added by third party packages
+. "/home/raven/.local/cargo/env"
