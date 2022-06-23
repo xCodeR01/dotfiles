@@ -1,2 +1,32 @@
-zstyle ':prezto:load' pmodule 'environment' 'git' 'prompt'
+### load useful modules
+zstyle ':prezto:load' pmodule \
+  'environment' \
+  'git' \
+  'history' \
+  'utility' \
+  'completion' \
+  'syntax-highlighting' \
+  'history-substring-search' \
+  'autosuggestions' \
+  'prompt' \
+  'terminal'
+
+### configure syntax-highlighting'
+zstyle ':prezto:module:syntax-highlighting' color 'yes'
+zstyle ':prezto:module:syntax-highlighting' highlighters \
+  'main' \
+  'brackets' \
+  'pattern' \
+### configure prompt
 zstyle ':prezto:module:prompt' theme 'powerlevel10k'
+
+### configure completion
+zstyle ':prezto:module:completion:*:hosts' etc-host-ignores \
+  '0.0.0.0' '127.0.0.1'
+ 
+### configure autosuggestions
+zstyle ':prezto:module:autosuggestions' color 'yes'
+
+zstyle ':prezto:module:terminal' auto-title 'yes'
+zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
+zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
