@@ -46,6 +46,3 @@ keymap("x", "J", ":move '>+1<CR>gv-gv")
 keymap("x", "K", ":move '<-2<CR>gv-gv")
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv")
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv")
-
--- Comment - move this to which key
-keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')

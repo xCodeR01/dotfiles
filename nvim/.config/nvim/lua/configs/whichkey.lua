@@ -79,7 +79,6 @@ local opts = {
 }
 
 local mappings = {
-
   ["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment" },
   ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
   ["b"] = {
@@ -102,7 +101,7 @@ local mappings = {
     name = "DAP",
     b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
     c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
-    i = { "<cmd>lua require'dap'.step_into()<cr>", "Step In" },
+    i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
     o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
     O = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
     r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle REPL" },
