@@ -10,8 +10,8 @@ make sure stow is installed `sudo apt install stow` or `sudo dnf install stow`
 remove any zsh related file from home like `.zshrc`, `.zprofile` etc. and then run
 `stow zsh`
 
-remove any nvim related file from `~/.config/nvim` and `~/.config/local/share/nvim`  and then run
+remove any nvim related file from `~/.config/nvim` and `~/.config/local/share/nvim` and then run
 `stow nvim` 
 
-to stow `git`, `compton`, `featherpad` etc., configs, run
+to stow configs for `git`, `compton`, `featherpad` etc., run
 `stow others`
