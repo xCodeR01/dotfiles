@@ -4,7 +4,6 @@ if not status_ok then
 end
 
 -- docs => https://github.com/kyazdani42/nvim-tree.lua#setup
--- each of these are documented in `:help nvim-tree.OPTION_NAME`
 nvim_tree.setup {
   hijack_cursor = false,
   disable_netrw = true,

@@ -62,24 +62,28 @@ return packer.startup(function(use)
   -- Colorschemes
   use "lunarvim/darkplus.nvim"
   use "morhetz/gruvbox"
+  use "Mofiqul/dracula.nvim"
+  use "navarasu/onedark.nvim"
+  use 'folke/tokyonight.nvim'
 
   -- CMP plugins
-  use "hrsh7th/nvim-cmp" -- the completion plugin
+  use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-buffer" -- buffer completions
   use "hrsh7th/cmp-path" -- path completions
   use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use "saadparwaiz1/cmp_luasnip" -- snippet completions
-  use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/nvim-cmp" -- the completion plugin
 
   -- Snippets
   use "L3MON4D3/LuaSnip" --snippet engine
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
+  use "saadparwaiz1/cmp_luasnip" -- snippet completions
 
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
+  use "glepnir/lspsaga.nvim" -- neovim LSP plugin
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
-  use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+  use "RRethy/vim-illuminate" -- hightlight uses of a word
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
@@ -90,8 +94,8 @@ return packer.startup(function(use)
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
-  use "p00f/nvim-ts-rainbow"
   use "JoosepAlviste/nvim-ts-context-commentstring"
+  use "p00f/nvim-ts-rainbow"
 
   -- Git
   use "lewis6991/gitsigns.nvim"

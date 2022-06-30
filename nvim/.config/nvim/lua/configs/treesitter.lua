@@ -50,4 +50,10 @@ configs.setup {
     enable = true,
     enable_autocmd = false,
   },
+  -- docs => https://github.com/p00f/nvim-ts-rainbow#installation-and-setup
+  rainbow = {
+    enable = true,
+    extended_mode = false,
+    max_file_lines = 5000,
+  }
 }
