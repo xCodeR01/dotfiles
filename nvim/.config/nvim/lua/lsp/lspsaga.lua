@@ -3,12 +3,22 @@ if not present then
   return
 end
 
+local config = {
+  virtual_text = false,
+  update_in_insert = true,
+  underline = true,
+  severity_sort = true,
+}
+
+vim.diagnostic.config(config)
+
 -- docs => https://github.com/glepnir/lspsaga.nvim#configuration
 saga.init_lsp_saga {
   border_style = "rounded",
   move_in_saga = { prev = "<C-k>", next = "<C-j>" },
   diagnostic_header = { "", "", "", "" },
   show_diagnostic_source = true,
+  diagnostic_source_bracket = {},
   code_action_icon = "💡",
   code_action_num_shortcut = true,
   code_action_lightbulb = {

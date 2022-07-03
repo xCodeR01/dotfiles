@@ -11,8 +11,11 @@ local diagnostics = null_ls.builtins.diagnostics
 null_ls.setup {
   debug = false,
   sources = {
-    diagnostics.eslint,
+    diagnostics.eslint.with {
+      command = "node_modules/.bin/eslint",
+    },
     formatting.prettier.with {
+      command = "node_modules/.bin/prettier",
       extra_filetypes = { "toml" },
     },
     diagnostics.flake8,

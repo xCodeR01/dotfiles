@@ -1,5 +1,6 @@
 local lspconfig = require "lspconfig"
 local lsp_installer = require "nvim-lsp-installer"
+local server_opts = require "lsp.server-opts"
 
 lsp_installer.setup {
   automatic_installation = true,
@@ -56,6 +57,9 @@ lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_c
 })
 
 for _, server in ipairs(lsp_installer.get_installed_servers()) do
-  -- server specific lua settings can be passed here
-  lspconfig[server.name].setup {}
+  local opts = {}
+  if server_opts[server.name] then
+    opts = server_opts[server.name]
+  end
+  lspconfig[server.name].setup(opts)
 end

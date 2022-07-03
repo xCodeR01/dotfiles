@@ -15,7 +15,7 @@ npairs.setup {
     map = "<M-e>", -- M is short for alt key
     chars = { "{", "[", "(", '"', "'", "`" },
     pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
-    offset = 0, -- Offset from pattern match
+    offset = 0,
     end_key = "$",
     keys = "qwertyuiopzxcvbnmasdfghjkl",
     check_comma = true,
@@ -23,11 +23,3 @@ npairs.setup {
     highlight_grey = "LineNr",
   },
 }
-
-local cmp_present, cmp = pcall(require, "cmp")
-if not cmp_present then
-  return
-end
-
-local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })

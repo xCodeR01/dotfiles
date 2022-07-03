@@ -3,8 +3,8 @@ if not lspconfig_present then
   return
 end
 
-local present, _ = pcall(require, "nvim-lsp-installer")
-if not present then
+local lsp_installer_present, _ = pcall(require, "nvim-lsp-installer")
+if not lsp_installer_present then
   return
 end
 
