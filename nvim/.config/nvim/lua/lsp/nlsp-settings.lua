@@ -3,10 +3,10 @@ if not present then
   return
 end
 
-nlspsettings.setup({
-  config_home = vim.fn.stdpath('config') .. '/lua/lsp/settings',
+nlspsettings.setup {
+  config_home = vim.fn.stdpath "config" .. "/nlsp-settings",
   local_settings_dir = ".nlsp-settings",
-  local_settings_root_markers = { '.git' },
+  local_settings_root_markers = { ".git" },
   append_default_schemas = true,
-  loader = 'json'
-})
+  loader = "json",
+}

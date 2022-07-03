@@ -34,7 +34,6 @@ keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi")
 -- Press jk fast to exit
 keymap("i", "jk", "<ESC>")
 
-
 -- Visual --
 -- Stay in indent mode
 keymap("v", "<", "<gv")
@@ -44,7 +43,6 @@ keymap("v", ">", ">gv")
 keymap("v", "<A-j>", ":m .+1<CR>==")
 keymap("v", "<A-k>", ":m .-2<CR>==")
 keymap("v", "p", '"_dP')
-
 
 -- Visual Block --
 -- Move text up and down

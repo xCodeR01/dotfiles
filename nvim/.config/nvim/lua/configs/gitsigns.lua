@@ -4,7 +4,7 @@ if not present then
 end
 
 -- docs => https://github.com/lewis6991/gitsigns.nvim#usage
-gitsigns.setup({
+gitsigns.setup {
   signs = {
     add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
     change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
@@ -45,4 +45,4 @@ gitsigns.setup({
   yadm = {
     enable = false,
   },
-})
+}

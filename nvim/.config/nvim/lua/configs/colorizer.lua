@@ -5,16 +5,16 @@ end
 
 -- docs => https://github.com/norcalli/nvim-colorizer.lua#customization
 colorizer.setup({
-  'css',
+  "css",
   html = {
-    mode = 'foreground',
+    mode = "foreground",
   },
-  'javascript',
-  'typescript',
+  "javascript",
+  "typescript",
 }, {
-  RGB      = true,
-  RRGGBB   = true,
-  names    = true,
-  css_fn   = true,
-  mode     = 'background',
+  RGB = true,
+  RRGGBB = true,
+  names = true,
+  css_fn = true,
+  mode = "background",
 })

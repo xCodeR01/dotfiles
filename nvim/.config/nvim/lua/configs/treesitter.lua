@@ -31,7 +31,7 @@ configs.setup {
     "toml",
     "tsx",
     "typescript",
-    "yaml"
+    "yaml",
   },
   sync_install = false,
   autopairs = {
@@ -52,5 +52,5 @@ configs.setup {
     enable = true,
     extended_mode = false,
     max_file_lines = 5000,
-  }
+  },
 }

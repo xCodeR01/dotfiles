@@ -4,12 +4,11 @@ if not present then
 end
 
 -- docs => https://github.com/glepnir/lspsaga.nvim#configuration
-saga.init_lsp_saga({
+saga.init_lsp_saga {
   border_style = "rounded",
-  move_in_saga = { prev = '<C-k>', next = '<C-j>' },
+  move_in_saga = { prev = "<C-k>", next = "<C-j>" },
   diagnostic_header = { "", "", "", "" },
   show_diagnostic_source = true,
-  diagnostic_source_bracket = {},
   code_action_icon = "💡",
   code_action_num_shortcut = true,
   code_action_lightbulb = {
@@ -18,24 +17,24 @@ saga.init_lsp_saga({
     sign_priority = 20,
     virtual_text = true,
   },
-  code_action_keys = {
-    quit = "q",
-    exec = "<CR>",
-  },
   finder_separator = "  ",
   max_preview_lines = 15,
   finder_action_keys = {
-    open = "<CR>",
+    open = "o",
     vsplit = "s",
     split = "i",
     tabe = "t",
     quit = "q",
-    scroll_down = "<C-f>",
-    scroll_up = "<C-b>",
+    scroll_up = "<C-u>",
+    scroll_down = "<C-d>",
   },
   definition_preview_icon = " ",
+  code_action_keys = {
+    quit = "q",
+    exec = "<CR>",
+  },
   rename_action_quit = "<C-e>",
-})
+}
 
 local action = require "lspsaga.action"
 local opts = { noremap = true, silent = true }

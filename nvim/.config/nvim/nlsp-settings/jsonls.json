@@ -1,0 +1,13 @@
+{
+  "json.schemas": [
+    {
+    "description" : "ESLint config",
+    "fileMatch" : [
+      ".eslintrc.json",
+      ".eslintrc"
+    ],
+    "url" : "https://json.schemastore.org/eslintrc.json"
+  }],
+  "json.format.enable": true,
+  "json.schemaDownload.enable": true
+}

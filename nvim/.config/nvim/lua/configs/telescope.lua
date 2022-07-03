@@ -5,7 +5,7 @@ end
 
 local actions = require "telescope.actions"
 
-telescope.setup({
+telescope.setup {
   defaults = {
     color_devicons = true,
     prompt_prefix = " ",
@@ -73,10 +73,10 @@ telescope.setup({
   extensions = {
     media_files = {
       filetypes = { "png", "webp", "jpg", "jpeg" },
-      find_cmd = "rg"
-    }
+      find_cmd = "rg",
+    },
   },
-})
+}
 
 local extensions_list = { "media_files", "projects" }
 

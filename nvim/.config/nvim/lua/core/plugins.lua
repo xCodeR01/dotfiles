@@ -85,7 +85,7 @@ return packer.startup(function(use)
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
-  use 'nvim-telescope/telescope-media-files.nvim'
+  use "nvim-telescope/telescope-media-files.nvim"
 
   -- Treesitter
   use {
@@ -99,7 +99,7 @@ return packer.startup(function(use)
   use "morhetz/gruvbox"
   use "Mofiqul/dracula.nvim"
   use "navarasu/onedark.nvim"
-  use 'folke/tokyonight.nvim'
+  use "folke/tokyonight.nvim"
   use "lunarvim/darkplus.nvim"
 
   -- automatically set up your configuration after cloning packer.nvim

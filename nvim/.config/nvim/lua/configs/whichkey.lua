@@ -180,8 +180,8 @@ local vopts = {
   nowait = true, -- use `nowait` when creating keymaps
 }
 local vmappings = {
-  ["/"] = { "<ESC><CMD>lua require(\"Comment.api\").toggle_linewise_op(vim.fn.visualmode())<CR>", "Comment" },
-  ["la"] = { "<cmd><C-U>Lspsaga range_code_action<CR>", "Code Actions" }
+  ["/"] = { '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>', "Comment" },
+  ["la"] = { "<cmd><C-U>Lspsaga range_code_action<CR>", "Code Actions" },
 }
 
 which_key.setup(setup)

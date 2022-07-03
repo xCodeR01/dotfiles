@@ -13,35 +13,34 @@ if not dap_install_present then
   return
 end
 
-
-dap_install.setup({})
+dap_install.setup {}
 
 -- debugger specific configs go here
 dap_install.config("python", {})
 
 -- docs => https://github.com/rcarriga/nvim-dap-ui#configuration
-dapui.setup({
+dapui.setup {
   layouts = {
     {
       elements = {
-        'scopes',
-        'breakpoints',
-        'stacks',
-        'watches',
+        "scopes",
+        "breakpoints",
+        "stacks",
+        "watches",
       },
       size = 40,
-      position = 'left',
+      position = "left",
     },
     {
       elements = {
-        'repl',
-        'console',
+        "repl",
+        "console",
       },
       size = 10,
-      position = 'bottom',
+      position = "bottom",
     },
   },
-})
+}
 
 vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
 

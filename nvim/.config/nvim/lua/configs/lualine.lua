@@ -5,14 +5,14 @@ end
 
 local conditions = {
   buffer_not_empty = function()
-    return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
+    return vim.fn.empty(vim.fn.expand "%:t") ~= 1
   end,
   hide_in_width = function()
     return vim.fn.winwidth(0) > 80
   end,
   check_git_workspace = function()
-    local filepath = vim.fn.expand('%:p:h')
-    local gitdir = vim.fn.finddir('.git', filepath .. ';')
+    local filepath = vim.fn.expand "%:p:h"
+    local gitdir = vim.fn.finddir(".git", filepath .. ";")
     return gitdir and #gitdir > 0 and #gitdir < #filepath
   end,
 }
@@ -44,7 +44,7 @@ local diff = {
   "diff",
   colored = false,
   symbols = { added = " ", modified = " ", removed = " " },
-  cond = conditions.buffer_not_empty
+  cond = conditions.buffer_not_empty,
 }
 
 local spaces = function()
@@ -52,13 +52,13 @@ local spaces = function()
 end
 
 local encoding = {
-  'o:encoding',
+  "o:encoding",
   fmt = string.upper,
   cond = conditions.hide_in_width,
 }
 
 local fileformat = {
-  'fileformat',
+  "fileformat",
   fmt = string.upper,
   icons_enabled = true,
 }
@@ -70,12 +70,12 @@ local filetype = {
 
 local progress = {
   "progress",
-  padding = { left = 0, right = 1 }
+  padding = { left = 0, right = 1 },
 }
 
 local location = { "location" }
 
-lualine.setup({
+lualine.setup {
   options = {
     icons_enabled = true,
     theme = "auto",
@@ -86,7 +86,7 @@ lualine.setup({
   },
   sections = {
     lualine_a = { mode },
-    lualine_b = { branch, },
+    lualine_b = { branch },
     lualine_c = { diagnostics, diff },
     lualine_x = { spaces, encoding, fileformat, filetype },
     lualine_y = { progress },
@@ -102,4 +102,4 @@ lualine.setup({
   },
   tabline = {},
   extensions = {},
-})
+}
