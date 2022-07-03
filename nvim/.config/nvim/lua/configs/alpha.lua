@@ -1,5 +1,5 @@
-local status_ok, alpha = pcall(require, "alpha")
-if not status_ok then
+local present, alpha = pcall(require, "alpha")
+if not present then
 	return
 end
 
@@ -12,6 +12,7 @@ dashboard.section.header.val = {
 	[[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
 	[[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
 }
+
 dashboard.section.buttons.val = {
 	dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
 	dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
@@ -22,15 +23,16 @@ dashboard.section.buttons.val = {
 	dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
 }
 
+-- make footer section
 local function footer()
 	return "Raven Redstain"
 end
 
 dashboard.section.footer.val = footer()
-
 dashboard.section.footer.opts.hl = "Type"
 dashboard.section.header.opts.hl = "Include"
 dashboard.section.buttons.opts.hl = "Keyword"
 
 dashboard.opts.opts.noautocmd = true
+
 alpha.setup(dashboard.opts)

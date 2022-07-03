@@ -1,13 +1,11 @@
-local status_ok, configs = pcall(require, "nvim-treesitter.configs")
-if not status_ok then
+local present, configs = pcall(require, "nvim-treesitter.configs")
+if not present then
   return
 end
 
 -- https://github.com/nvim-treesitter/nvim-treesitter#modules
 configs.setup {
   ensure_installed = {
-    "bash",
-    "c",
     "comment",
     "cpp",
     "css",
@@ -36,13 +34,12 @@ configs.setup {
     "yaml"
   },
   sync_install = false,
-  ignore_install = { "" },
   autopairs = {
     enable = true,
   },
   highlight = {
     enable = true,
-    disable = { "" },
+    use_languagetree = true,
     additional_vim_regex_highlighting = true,
   },
   indent = { enable = true, disable = { "yaml" } },

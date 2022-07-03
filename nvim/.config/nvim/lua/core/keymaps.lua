@@ -6,6 +6,10 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Normal --
+-- Editor actions
+keymap("n", "<C-s>", "<cmd>w<CR>")
+keymap("n", "<C-q>", "<cmd>qa<CR>")
+
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h")
 keymap("n", "<C-j>", "<C-w>j")
@@ -26,14 +30,10 @@ keymap("n", "<S-h>", ":bprevious<CR>")
 keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi")
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi")
 
-
 -- Insert --
--- Press jk fast to exit 
+-- Press jk fast to exit
 keymap("i", "jk", "<ESC>")
 
--- Disable some defaults keymaps
-keymap("i", "<C-p>", "<Nop>")
-keymap("i", "<C-n>", "<Nop>")
 
 -- Visual --
 -- Stay in indent mode

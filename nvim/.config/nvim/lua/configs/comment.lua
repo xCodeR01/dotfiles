@@ -3,6 +3,7 @@ if not status_ok then
   return
 end
 
+-- docs => https://github.com/numToStr/Comment.nvim#configuration-optional
 comment.setup {
   pre_hook = function(ctx)
     local U = require "Comment.utils"

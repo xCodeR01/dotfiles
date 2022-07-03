@@ -1,5 +1,5 @@
-local status_ok, bufferline = pcall(require, "bufferline")
-if not status_ok then
+local present, bufferline = pcall(require, "bufferline")
+if not present then
   return
 end
 
@@ -55,31 +55,30 @@ bufferline.setup {
       guibg = { attribute = "bg", highlight = "TabLine" },
     },
 
-    tab_selected = {
-      guifg = { attribute = "fg", highlight = "Normal" },
-      guibg = { attribute = "bg", highlight = "Normal" },
-    },
     tab = {
       guifg = { attribute = "fg", highlight = "TabLine" },
       guibg = { attribute = "bg", highlight = "TabLine" },
     },
+    tab_selected = {
+      guifg = { attribute = "fg", highlight = "Normal" },
+      guibg = { attribute = "bg", highlight = "Normal" },
+    },
     tab_close = {
-      -- guifg = {attribute='fg',highlight='LspDiagnosticsDefaultError'},
       guifg = { attribute = "fg", highlight = "TabLineSel" },
       guibg = { attribute = "bg", highlight = "Normal" },
     },
 
+    duplicate = {
+      guifg = { attribute = "fg", highlight = "TabLine" },
+      guibg = { attribute = "bg", highlight = "TabLine" },
+      gui = "italic",
+    },
     duplicate_selected = {
       guifg = { attribute = "fg", highlight = "TabLineSel" },
       guibg = { attribute = "bg", highlight = "TabLineSel" },
       gui = "italic",
     },
     duplicate_visible = {
-      guifg = { attribute = "fg", highlight = "TabLine" },
-      guibg = { attribute = "bg", highlight = "TabLine" },
-      gui = "italic",
-    },
-    duplicate = {
       guifg = { attribute = "fg", highlight = "TabLine" },
       guibg = { attribute = "bg", highlight = "TabLine" },
       gui = "italic",

@@ -1,11 +1,34 @@
-local status_ok, lualine = pcall(require, "lualine")
-if not status_ok then
+local present, lualine = pcall(require, "lualine")
+if not present then
   return
 end
 
-local hide_in_width = function()
-  return vim.fn.winwidth(0) > 80
-end
+local conditions = {
+  buffer_not_empty = function()
+    return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
+  end,
+  hide_in_width = function()
+    return vim.fn.winwidth(0) > 80
+  end,
+  check_git_workspace = function()
+    local filepath = vim.fn.expand('%:p:h')
+    local gitdir = vim.fn.finddir('.git', filepath .. ';')
+    return gitdir and #gitdir > 0 and #gitdir < #filepath
+  end,
+}
+
+local mode = {
+  "mode",
+  fmt = function(str)
+    return "-- " .. str .. " --"
+  end,
+}
+
+local branch = {
+  "branch",
+  icons_enabled = true,
+  icon = "",
+}
 
 local diagnostics = {
   "diagnostics",
@@ -21,63 +44,53 @@ local diff = {
   "diff",
   colored = false,
   symbols = { added = " ", modified = " ", removed = " " },
-  cond = hide_in_width
+  cond = conditions.buffer_not_empty
 }
 
-local mode = {
-  "mode",
-  fmt = function(str)
-    return "-- " .. str .. " --"
-  end,
+local spaces = function()
+  return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+end
+
+local encoding = {
+  'o:encoding',
+  fmt = string.upper,
+  cond = conditions.hide_in_width,
+}
+
+local fileformat = {
+  'fileformat',
+  fmt = string.upper,
+  icons_enabled = true,
 }
 
 local filetype = {
   "filetype",
   icons_enabled = false,
-  icon = nil,
 }
 
-local branch = {
-  "branch",
-  icons_enabled = true,
-  icon = "",
+local progress = {
+  "progress",
+  padding = { left = 0, right = 1 }
 }
 
-local location = {
-  "location",
-  padding = 0,
-}
-
--- cool function for progress
-local progress = function()
-  local current_line = vim.fn.line(".")
-  local total_lines = vim.fn.line("$")
-  local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
-  local line_ratio = current_line / total_lines
-  local index = math.ceil(line_ratio * #chars)
-  return chars[index]
-end
-
-local spaces = function()
-  return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
-end
+local location = { "location" }
 
 lualine.setup({
   options = {
     icons_enabled = true,
     theme = "auto",
     component_separators = { left = "", right = "" },
-    section_separators = { left = "", right = "" },
+    section_separators = { left = "", right = "" },
     disabled_filetypes = { "dashboard", "NvimTree", "Outline" },
     always_divide_middle = true,
   },
   sections = {
-    lualine_a = { branch, diagnostics },
-    lualine_b = { mode },
-    lualine_c = {},
-    lualine_x = { diff, spaces, "encoding", filetype },
-    lualine_y = { location },
-    lualine_z = { progress },
+    lualine_a = { mode },
+    lualine_b = { branch, },
+    lualine_c = { diagnostics, diff },
+    lualine_x = { spaces, encoding, fileformat, filetype },
+    lualine_y = { progress },
+    lualine_z = { location },
   },
   inactive_sections = {
     lualine_a = {},

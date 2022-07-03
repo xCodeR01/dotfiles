@@ -1,27 +1,29 @@
--- setup core stuff
-require "options"
-require "keymaps"
-require "plugins"
-require "colorscheme"
+-- core setup
+require "core.options"
+require "core.keymaps"
+require "core.colorscheme"
+require "core.plugins"
 
--- setup plugins
-require "configs.cmp"
-require "configs.telescope"
-require "configs.treesitter"
+-- plugin configurations
+require "configs.alpha"
 require "configs.autopairs"
-require "configs.comment"
-require "configs.gitsigns"
 require "configs.nvim-tree"
+require "configs.cmp"
+require "configs.comment"
+require "configs.illuminate"
+require "configs.impatient"
+require "configs.indentline"
 require "configs.bufferline"
 require "configs.lualine"
-require "configs.toggleterm"
+require "configs.gitsigns"
+require "configs.treesitter"
+require "configs.telescope"
 require "configs.project"
-require "configs.impatient"
-require "configs.alpha"
+require "configs.toggleterm"
+require "configs.dap"
 require "configs.whichkey"
-require "configs.autocommands"
+require "configs.lightspeed"
+require "configs.colorizer"
 
--- Setup lsp
-require "lsp.lsp-installer"
-require "lsp.lspsaga"
-require "lsp.null-ls"
+-- lsp setup
+require "lsp"

@@ -1,6 +1,6 @@
 local fn = vim.fn
 
--- Automatically install packer
+--automatically install packer
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
   PACKER_BOOTSTRAP = fn.system {
@@ -15,7 +15,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
+-- autocommand that reloads neovim whenever you save the plugins.lua file
 vim.cmd [[
   augroup packer_user_config
     autocmd!
@@ -23,13 +23,13 @@ vim.cmd [[
   augroup end
 ]]
 
--- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
+-- use a protected call so we don't error out on first use
+local present, packer = pcall(require, "packer")
+if not present then
   return
 end
 
--- Have packer use a popup window
+-- have packer use a popup window
 packer.init {
   display = {
     open_fn = function()
@@ -38,52 +38,50 @@ packer.init {
   },
 }
 
--- Install your plugins here
 return packer.startup(function(use)
+  -- General
   use "wbthomason/packer.nvim" -- Have packer manage itself
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-  use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
-  use "numToStr/Comment.nvim" -- Easily comment stuff
+  use "moll/vim-bbye"
+  use "goolord/alpha-nvim"
+  use "windwp/nvim-autopairs"
   use "kyazdani42/nvim-web-devicons"
   use "kyazdani42/nvim-tree.lua"
   use "akinsho/bufferline.nvim"
-  use "moll/vim-bbye"
   use "nvim-lualine/lualine.nvim"
-  use "ggandor/lightspeed.nvim"
+  use "numToStr/Comment.nvim"
+  use "lewis6991/gitsigns.nvim"
   use "akinsho/toggleterm.nvim"
   use "ahmedkhalf/project.nvim"
   use "lewis6991/impatient.nvim"
   use "lukas-reineke/indent-blankline.nvim"
-  use "goolord/alpha-nvim"
-  use "antoinemadec/FixCursorHold.nvim" -- this is needed to fix lsp doc highlight
+  use "ggandor/lightspeed.nvim"
+  use "norcalli/nvim-colorizer.lua"
   use "folke/which-key.nvim"
 
-  -- Colorschemes
-  use "lunarvim/darkplus.nvim"
-  use "morhetz/gruvbox"
-  use "Mofiqul/dracula.nvim"
-  use "navarasu/onedark.nvim"
-  use 'folke/tokyonight.nvim'
-
-  -- CMP plugins
-  use "hrsh7th/cmp-nvim-lsp"
+  -- CMP and Snippets
+  use "hrsh7th/nvim-cmp" -- the completion plugin
   use "hrsh7th/cmp-buffer" -- buffer completions
   use "hrsh7th/cmp-path" -- path completions
   use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use "hrsh7th/nvim-cmp" -- the completion plugin
-
-  -- Snippets
+  use "hrsh7th/cmp-nvim-lsp" -- lsp completions
+  use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "L3MON4D3/LuaSnip" --snippet engine
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
-  use "saadparwaiz1/cmp_luasnip" -- snippet completions
 
   -- LSP
+  use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "neovim/nvim-lspconfig" -- enable LSP
   use "glepnir/lspsaga.nvim" -- neovim LSP plugin
-  use "williamboman/nvim-lsp-installer" -- simple to use language server installer
-  use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+  use "tamago324/nlsp-settings.nvim" -- manage server settings in json
   use "RRethy/vim-illuminate" -- hightlight uses of a word
+  use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+
+  -- DAP
+  use "mfussenegger/nvim-dap"
+  use "rcarriga/nvim-dap-ui"
+  use "ravenxrz/DAPInstall.nvim"
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
@@ -94,19 +92,17 @@ return packer.startup(function(use)
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
-  use "JoosepAlviste/nvim-ts-context-commentstring"
   use "p00f/nvim-ts-rainbow"
+  use "JoosepAlviste/nvim-ts-context-commentstring"
 
-  -- Git
-  use "lewis6991/gitsigns.nvim"
+  -- Colorschemes
+  use "morhetz/gruvbox"
+  use "Mofiqul/dracula.nvim"
+  use "navarasu/onedark.nvim"
+  use 'folke/tokyonight.nvim'
+  use "lunarvim/darkplus.nvim"
 
-  -- DAP
-  use "mfussenegger/nvim-dap"
-  use "rcarriga/nvim-dap-ui"
-  use "ravenxrz/DAPInstall.nvim"
-
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
+  -- automatically set up your configuration after cloning packer.nvim
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end

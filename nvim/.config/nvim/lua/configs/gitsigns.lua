@@ -1,10 +1,10 @@
-local status_ok, gitsigns = pcall(require, "gitsigns")
-if not status_ok then
+local present, gitsigns = pcall(require, "gitsigns")
+if not present then
   return
 end
 
 -- docs => https://github.com/lewis6991/gitsigns.nvim#usage
-gitsigns.setup {
+gitsigns.setup({
   signs = {
     add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
     change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
@@ -24,7 +24,7 @@ gitsigns.setup {
   current_line_blame = false,
   current_line_blame_opts = {
     virt_text = true,
-    virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
+    virt_text_pos = "eol",
     delay = 1000,
     ignore_whitespace = false,
   },
@@ -33,11 +33,10 @@ gitsigns.setup {
   },
   sign_priority = 6,
   update_debounce = 100,
-  status_formatter = nil, -- Use default
+  status_formatter = nil,
   max_file_length = 40000,
   preview_config = {
-    -- Options passed to nvim_open_win
-    border = "single",
+    border = "rounded",
     style = "minimal",
     relative = "cursor",
     row = 0,
@@ -46,4 +45,4 @@ gitsigns.setup {
   yadm = {
     enable = false,
   },
-}
+})

@@ -1,29 +1,26 @@
-local status_ok, telescope = pcall(require, "telescope")
-if not status_ok then
+local present, telescope = pcall(require, "telescope")
+if not present then
   return
 end
 
-telescope.load_extension('media_files')
-
 local actions = require "telescope.actions"
 
-telescope.setup {
+telescope.setup({
   defaults = {
-
+    color_devicons = true,
     prompt_prefix = " ",
     selection_caret = " ",
     path_display = { "smart" },
     file_ignore_patterns = { "node_modules" },
-
     mappings = {
       i = {
-        ["<C-n>"] = actions.cycle_history_next,
-        ["<C-p>"] = actions.cycle_history_prev,
+        ["<Down>"] = actions.cycle_history_next,
+        ["<Up>"] = actions.cycle_history_prev,
 
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
 
-        ["<C-c>"] = actions.close,
+        ["<C-e>"] = actions.close,
         ["<CR>"] = actions.select_default,
         ["<C-x>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,
@@ -73,17 +70,16 @@ telescope.setup {
       },
     },
   },
-  pickers = {
-    -- Default configuration for builtin pickers goes here:
-    -- picker_name = {
-    --   picker_config_key = value,
-    -- }
-  },
   extensions = {
     media_files = {
-      -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
       filetypes = { "png", "webp", "jpg", "jpeg" },
-      find_cmd = "rg" -- find command (defaults to `fd`)
+      find_cmd = "rg"
     }
   },
-}
+})
+
+local extensions_list = { "media_files", "projects" }
+
+for _, ext in ipairs(extensions_list) do
+  telescope.load_extension(ext)
+end

@@ -1,5 +1,5 @@
-local status_ok, nvim_tree = pcall(require, "nvim-tree")
-if not status_ok then
+local present, nvim_tree = pcall(require, "nvim-tree")
+if not present then
   return
 end
 
@@ -15,8 +15,12 @@ nvim_tree.setup {
     "alpha",
   },
   open_on_tab = false,
-  update_cwd = true,
   respect_buf_cwd = true,
+  update_cwd = true,
+  update_focused_file = {
+    enable = true,
+    update_cwd = true,
+  },
   diagnostics = {
     enable = true,
     show_on_dirs = false,
@@ -30,10 +34,6 @@ nvim_tree.setup {
   filters = {
     custom = { "^\\.git" }
   },
-  update_focused_file = {
-    enable = true,
-    update_cwd = true,
-  },
   view = {
     width = 30,
     height = 30,
@@ -45,6 +45,7 @@ nvim_tree.setup {
     signcolumn = "yes",
     mappings = {
       custom_only = false,
+      -- to see default mapping use `:help nvim-tree.view.mappings`
       list = {
         { key = { "<CR>", "o", "l" }, action = "edit" },
         { key = "h", action = "close_node" },
