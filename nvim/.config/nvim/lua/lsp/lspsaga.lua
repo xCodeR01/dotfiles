@@ -3,15 +3,6 @@ if not present then
   return
 end
 
-local config = {
-  virtual_text = false,
-  update_in_insert = true,
-  underline = true,
-  severity_sort = true,
-}
-
-vim.diagnostic.config(config)
-
 -- docs => https://github.com/glepnir/lspsaga.nvim#configuration
 saga.init_lsp_saga {
   border_style = "rounded",

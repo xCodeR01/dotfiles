@@ -56,10 +56,17 @@ lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_c
   capabilities = capabilities,
 })
 
+-- init lsp servers
 for _, server in ipairs(lsp_installer.get_installed_servers()) do
-  local opts = {}
-  if server_opts[server.name] then
-    opts = server_opts[server.name]
-  end
+  local opts = server_opts[server.name] or {}
   lspconfig[server.name].setup(opts)
 end
+
+local config = {
+  virtual_text = false,
+  update_in_insert = true,
+  underline = true,
+  severity_sort = true,
+}
+
+vim.diagnostic.config(config)
