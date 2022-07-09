@@ -5,16 +5,15 @@ end
 
 -- docs => https://github.com/kyazdani42/nvim-tree.lua#setup
 nvim_tree.setup {
-  hijack_cursor = false,
   disable_netrw = true,
   hijack_netrw = true,
+  hijack_cursor = false,
   open_on_setup = false,
   ignore_ft_on_setup = {
     "startify",
     "dashboard",
     "alpha",
   },
-  open_on_tab = false,
   respect_buf_cwd = true,
   update_cwd = true,
   update_focused_file = {
@@ -35,17 +34,13 @@ nvim_tree.setup {
     custom = { "^\\.git" },
   },
   view = {
-    width = 30,
-    height = 30,
+    width = 25,
     hide_root_folder = true,
     side = "left",
     adaptive_size = true,
-    number = false,
-    relativenumber = false,
-    signcolumn = "yes",
+    -- to see default mapping use `:help nvim-tree.view.mappings`
     mappings = {
       custom_only = false,
-      -- to see default mapping use `:help nvim-tree.view.mappings`
       list = {
         { key = { "<CR>", "o", "l" }, action = "edit" },
         { key = "h", action = "close_node" },

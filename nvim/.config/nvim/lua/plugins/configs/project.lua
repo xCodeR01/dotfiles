@@ -15,3 +15,4 @@ project.setup {
   ignore_lsp = {},
   datapath = vim.fn.stdpath "data",
 }
+ 

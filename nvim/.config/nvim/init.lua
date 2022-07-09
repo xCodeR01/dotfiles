@@ -1,29 +1,20 @@
+local autocmd = vim.api.nvim_create_autocmd
+
+-- don't auto-comment newlines
+autocmd("BufEnter", {
+  pattern = "*",
+  command = "set fo-=c fo-=r fo-=o",
+})
+
 -- core setup
 require "core.options"
-require "core.keymaps"
 require "core.colorscheme"
-require "core.plugins"
+
+vim.defer_fn(function()
+  local mappings = require "core.mappings"
+  require("core.utils").load_mappings(mappings)
+end, 0)
 
 -- plugin configurations
-require "configs.alpha"
-require "configs.autopairs"
-require "configs.nvim-tree"
-require "configs.cmp"
-require "configs.comment"
-require "configs.illuminate"
-require "configs.impatient"
-require "configs.indentline"
-require "configs.bufferline"
-require "configs.lualine"
-require "configs.gitsigns"
-require "configs.treesitter"
-require "configs.telescope"
-require "configs.project"
-require "configs.toggleterm"
-require "configs.dap"
-require "configs.whichkey"
-require "configs.lightspeed"
-require "configs.colorizer"
-
--- lsp setup
-require "lsp"
+require("core.packer").bootstrap()
+require "plugins"

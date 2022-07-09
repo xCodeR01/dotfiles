@@ -6,6 +6,7 @@ end
 -- https://github.com/nvim-treesitter/nvim-treesitter#modules
 configs.setup {
   ensure_installed = {
+    "c",
     "comment",
     "cpp",
     "css",
@@ -34,20 +35,22 @@ configs.setup {
     "yaml",
   },
   sync_install = false,
-  autopairs = {
-    enable = true,
-  },
   highlight = {
     enable = true,
     use_languagetree = true,
     additional_vim_regex_highlighting = true,
   },
   indent = { enable = true, disable = { "yaml" } },
+  -- for JoosepAlviste/nvim-ts-context-commentstring
   context_commentstring = {
     enable = true,
     enable_autocmd = false,
   },
-  -- docs => https://github.com/p00f/nvim-ts-rainbow#installation-and-setup
+  -- for windwp/nvim-ts-autotag
+  autotag = {
+    enable = true,
+  },
+  -- for p00f/nvim-ts-rainbow
   rainbow = {
     enable = true,
     extended_mode = false,
