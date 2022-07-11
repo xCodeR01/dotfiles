@@ -11,7 +11,7 @@ telescope.setup {
     prompt_prefix = " ",
     selection_caret = " ",
     path_display = { "smart" },
-    file_ignore_patterns = { "node_modules" },
+    file_ignore_patterns = { "node_modules", "build" },
     mappings = {
       i = {
         ["<Down>"] = actions.cycle_history_next,
@@ -78,7 +78,7 @@ telescope.setup {
   },
 }
 
-local extensions_list = { "media_files", "projects" }
+local extensions_list = { "media_files" }
 
 for _, ext in ipairs(extensions_list) do
   telescope.load_extension(ext)

@@ -14,18 +14,17 @@ local function plugins(use)
   -- cmp and snippets
   use { "rafamadriz/friendly-snippets", module = "cmp_nvim_lsp", event = "InsertEnter" }
   use {
-    "hrsh7th/nvim-cmp",
+    "L3MON4D3/LuaSnip",
     after = "friendly-snippets",
     config = function()
-      require "plugins.configs.cmp"
+      require("plugins.configs.others").luasnip()
     end,
   }
   use {
-    "L3MON4D3/LuaSnip",
-    wants = "friendly-snippets",
-    after = "nvim-cmp",
+    "hrsh7th/nvim-cmp",
+    after = "LuaSnip",
     config = function()
-      require("plugins.configs.others").luasnip()
+      require "plugins.configs.cmp"
     end,
   }
   use { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" }
@@ -122,16 +121,17 @@ local function plugins(use)
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     requires = {
-      { "nvim-telescope/telescope-media-files.nvim" },
-      {
-        "ahmedkhalf/project.nvim",
-        config = function()
-          require "plugins.configs.project"
-        end,
-      }
+      "nvim-telescope/telescope-media-files.nvim",
     },
     config = function()
       require "plugins.configs.telescope"
+    end,
+  }
+  use {
+    "ahmedkhalf/project.nvim",
+    after = "telescope.nvim",
+    config = function()
+      require "plugins.configs.project"
     end,
   }
 
@@ -204,7 +204,7 @@ local function plugins(use)
   }
   use {
     "akinsho/bufferline.nvim",
-    requires = { 'moll/vim-bbye' },
+    requires = { "moll/vim-bbye" },
     setup = function()
       require("core.lazy_load").bufferline()
     end,
@@ -214,7 +214,8 @@ local function plugins(use)
   }
   use {
     "akinsho/toggleterm.nvim",
-    module = "toggleterm",
+    tag = 'v1.*',
+    cmd = "ToggleTerm",
     config = function()
       require "plugins.configs.toggleterm"
     end,
@@ -233,11 +234,10 @@ local function plugins(use)
   }
 
   -- colorschemes
-  use "morhetz/gruvbox"
-  use "Mofiqul/dracula.nvim"
   use "navarasu/onedark.nvim"
-  use "folke/tokyonight.nvim"
-  use "lunarvim/darkplus.nvim"
+  -- use "morhetz/gruvbox"
+  -- use "Mofiqul/dracula.nvim"
+  -- use "folke/tokyonight.nvim"
 
   -- load whichkey after all the gui
   use {

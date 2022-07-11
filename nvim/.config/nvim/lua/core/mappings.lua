@@ -5,50 +5,48 @@ end
 local M = {}
 
 M.general = {
-  i = {
-    -- keymap("i", "jk", "<ESC>")
-    -- go to  beginning and end
-    ["<C-b>"] = { "<ESC>^i", "論 beginning of line" },
-    ["<C-e>"] = { "<End>", "壟 end of line" },
-  },
   n = {
-    -- keymap("n", "<C-Up>", ":resize +2<CR>")
-    -- keymap("n", "<C-Down>", ":resize -2<CR>")
-    -- keymap("n", "<C-Left>", ":vertical resize -2<CR>")
-    -- keymap("n", "<C-Right>", ":vertical resize +2<CR>")
-    ["<ESC>"] = { "<cmd> noh <CR>", "  no highlight" },
+    ["<leader>a"] = { "<cmd>Alpha<cr>", "Alpha" },
+    ["<leader>h"] = { "<cmd> nohlsearch <CR>", "  No Highlight" },
 
-    -- switch between windows
+    -- resize window
+    ["<C-Up>"] = { ":resize +2<CR>", "Increase window height" },
+    ["<C-Down>"] = { ":resize -2<CR>", "Decrease window height" },
+    ["<C-Left>"] = { ":vertical resize -2<CR>", "Decrease window width" },
+    ["<C-Right>"] = { ":vertical resize +2<CR>", "Increase window width" },
+
+    -- switch between windows and buffers
     ["<C-h>"] = { "<C-w>h", " window left" },
     ["<C-l>"] = { "<C-w>l", " window right" },
     ["<C-j>"] = { "<C-w>j", " window down" },
     ["<C-k>"] = { "<C-w>k", " window up" },
-
     ["<S-l>"] = { ":bnext<CR>", "Buffer right" },
     ["<S-h>"] = { ":bprevious<CR>", "Buffer left" },
 
-    -- save
-    ["<leader>w"] = { "<cmd> w <CR>", "﬚  save file" },
+    -- save, close and quit
+    ["<leader>w"] = { "<cmd> w <CR>", "﬚  Save File" },
+    ["<leader>q"] = { "<cmd> q <CR>", "Quit" },
+    ["<leader>c"] = { "<cmd> Bdelete <CR>", "Close buffer" },
 
-    -- Copy all
-    ["<C-c>"] = { "<cmd> %y+ <CR>", "  copy whole file" },
-    -- keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi")
-    -- keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi")
+    -- move text
+    ["<A-j>"] = { "<Esc>:m .+1<CR>==gi", "Move text up" },
+    ["<A-k>"] = { "<Esc>:m .-2<CR>==gi", "Move text down" },
   },
-
+  i = {
+    ["jk"] = { "<Esc>", "Exit insert mode" },
+    ["<C-b>"] = { "<ESC>^i", "論 beginning of line" },
+    ["<C-e>"] = { "<End>", "壟 end of line" },
+  },
   v = {
+    ["<A-j>"] = { ":m .+1<CR>==", "Move text up" },
+    ["<A-k>"] = { ":m .-2<CR>==", "Move text down" },
+    p = { '"_dP', "" },
 
-    -- -- Stay in indent mode
-    -- keymap("v", "<", "<gv")
-    -- keymap("v", ">", ">gv")
-
-    -- -- Move text up and down
-    -- keymap("v", "<A-j>", ":m .+1<CR>==")
-    -- keymap("v", "<A-k>", ":m .-2<CR>==")
-    -- keymap("v", "p", '"_dP')
+    -- Stay in indent mode
+    ["<"] = { "<gv", "" },
+    [">"] = { ">gv", "" },
   },
   x = {
-
     -- keymap("x", "J", ":move '>+1<CR>gv-gv")
     -- keymap("x", "K", ":move '<-2<CR>gv-gv")
     -- keymap("x", "<A-j>", ":move '>+1<CR>gv-gv")
@@ -66,153 +64,115 @@ M.comment = {
   n = {
     ["<leader>/"] = {
       "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>",
-      "蘒  toggle comment",
+      "蘒 Toggle Comment",
     },
   },
 
   v = {
     ["<leader>/"] = {
       "<ESC><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>",
-      "蘒  toggle comment",
+      "蘒 Toggle Comment",
     },
   },
 }
 
 M.nvimtree = {
   n = {
-    ["<leader>e"] = { "<cmd> NvimTreeToggle <CR>", "   toggle nvimtree" },
+    ["<leader>e"] = { "<cmd> NvimTreeToggle <CR>", "  Toggle Nvimtree" },
   },
 }
 
 M.telescope = {
   n = {
-    -- find
-    ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "  find files" },
-    ["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "  find all" },
-    ["<leader>fw"] = { "<cmd> Telescope live_grep <CR>", "   live grep" },
-    ["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "  find buffers" },
-    ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "  help page" },
-    ["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "   find oldfiles" },
-    ["<leader>tk"] = { "<cmd> Telescope keymaps <CR>", "   show keys" },
+    ["<leader>f"] = {
+      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+      "  Find Files",
+    },
+    ["<leader>F"] = { "<cmd> Telescope live_grep theme=ivy<CR>", "  Live grep" },
+    ["<leader>b"] = {
+      "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+      "Buffers",
+    },
+    ["<leader>P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+    ["<leader>s"] = { name = "Search" },
+    ["<leader>sa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find All Files" },
+    ["<leader>sc"] = { "<cmd> Telescope colorscheme<cr>", "Colorscheme" },
+    ["<leader>sh"] = { "<cmd> Telescope help_tags<cr>", "Find Help" },
+    ["<leader>sr"] = { "<cmd> Telescope oldfiles<cr>", "Open Recent File" },
+    ["<leader>sR"] = { "<cmd> Telescope registers<cr>", "Registers" },
+    ["<leader>sk"] = { "<cmd> Telescope keymaps<cr>", "Keymaps" },
+    ["<leader>sC"] = { "<cmd> Telescope commands<cr>", "Commands" },
 
     -- git
-    ["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "   git commits" },
-    ["<leader>gt"] = { "<cmd> Telescope git_status <CR>", "  git status" },
-
-    -- pick a hidden term
-    ["<leader>pt"] = { "<cmd> Telescope terms <CR>", "   pick hidden term" },
-
-    -- theme switcher
-    ["<leader>th"] = { "<cmd> Telescope themes <CR>", "   nvchad themes" },
+    ["<leader>go"] = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+    ["<leader>gb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+    ["<leader>gc"] = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
   },
 }
 
-M.nvterm = {
-  t = {
-    -- toggle in terminal mode
-    ["<A-i>"] = {
-      function()
-        require("nvterm.terminal").toggle "float"
-      end,
-      "   toggle floating term",
-    },
+-- M.whichkey = {
+--   n = {
+--     ["<leader>wK"] = {
+--       function()
+--         vim.cmd "WhichKey"
+--       end,
+--       "  which-key all keymaps",
+--     },
+--     ["<leader>wk"] = {
+--       function()
+--         local input = vim.fn.input "WhichKey: "
+--         vim.cmd("WhichKey " .. input)
+--       end,
+--       "  which-key query lookup",
+--     },
+--   },
+-- }
 
-    ["<A-h>"] = {
-      function()
-        require("nvterm.terminal").toggle "horizontal"
-      end,
-      "   toggle horizontal term",
-    },
+-- M.blankline = {
+--   n = {
+--     ["<leader>bc"] = {
+--       function()
+--         local ok, start = require("indent_blankline.utils").get_current_context(
+--           vim.g.indent_blankline_context_patterns,
+--           vim.g.indent_blankline_use_treesitter_scope
+--         )
 
-    ["<A-v>"] = {
-      function()
-        require("nvterm.terminal").toggle "vertical"
-      end,
-      "   toggle vertical term",
-    },
-  },
+--         if ok then
+--           vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { start, 0 })
+--           vim.cmd [[normal! _]]
+--         end
+--       end,
 
+--       " Jump to current_context",
+--     },
+--   },
+-- }
+
+M.gitsigns = {
   n = {
-    -- toggle in normal mode
-    ["<A-i>"] = {
-      function()
-        require("nvterm.terminal").toggle "float"
-      end,
-      "   toggle floating term",
+    ["<leader>g"] = { name = "Git" },
+    ["<leader>gg"] = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
+    ["<leader>gj"] = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+    ["<leader>gk"] = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
+    ["<leader>gl"] = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
+    ["<leader>gp"] = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+    ["<leader>gr"] = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+    ["<leader>gR"] = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+    ["<leader>gs"] = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+    ["<leader>gu"] = {
+      "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+      "Undo Stage Hunk",
     },
-
-    ["<A-h>"] = {
-      function()
-        require("nvterm.terminal").toggle "horizontal"
-      end,
-      "   toggle horizontal term",
-    },
-
-    ["<A-v>"] = {
-      function()
-        require("nvterm.terminal").toggle "vertical"
-      end,
-      "   toggle vertical term",
-    },
-
-    -- new
-
-    ["<leader>h"] = {
-      function()
-        require("nvterm.terminal").new "horizontal"
-      end,
-      "   new horizontal term",
-    },
-
-    ["<leader>v"] = {
-      function()
-        require("nvterm.terminal").new "vertical"
-      end,
-      "   new vertical term",
-    },
-  },
-}
-
-M.whichkey = {
-  n = {
-    ["<leader>wK"] = {
-      function()
-        vim.cmd "WhichKey"
-      end,
-      "   which-key all keymaps",
-    },
-    ["<leader>wk"] = {
-      function()
-        local input = vim.fn.input "WhichKey: "
-        vim.cmd("WhichKey " .. input)
-      end,
-      "   which-key query lookup",
-    },
-  },
-}
-
-M.blankline = {
-  n = {
-    ["<leader>bc"] = {
-      function()
-        local ok, start = require("indent_blankline.utils").get_current_context(
-          vim.g.indent_blankline_context_patterns,
-          vim.g.indent_blankline_use_treesitter_scope
-        )
-
-        if ok then
-          vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { start, 0 })
-          vim.cmd [[normal! _]]
-        end
-      end,
-
-      "  Jump to current_context",
+    ["<leader>gd"] = {
+      "<cmd>Gitsigns diffthis HEAD<cr>",
+      "Diff",
     },
   },
 }
 
 M.dap = {
   n = {
+    ["<leader>d"] = { name = "DAP" },
     ["<leader>db"] = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
     ["<leader>dc"] = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
     ["<leader>di"] = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
@@ -222,6 +182,30 @@ M.dap = {
     ["<leader>dl"] = { "<cmd>lua require'dap'.run_last()<cr>", "Run Last" },
     ["<leader>du"] = { "<cmd>lua require'dapui'.toggle()<cr>", "Toggle DAP UI" },
     ["<leader>dt"] = { "<cmd>lua require'dap'.terminate()<cr>", "Terminate" },
+  },
+}
+
+M.packer = {
+  n = {
+    ["<leader>p"] = { name = "Packer" },
+    ["<leader>pc"] = { "<cmd>PackerCompile<cr>", "Compile" },
+    ["<leader>pi"] = { "<cmd>PackerInstall<cr>", "Install" },
+    ["<leader>ps"] = { "<cmd>PackerSync<cr>", "Sync" },
+    ["<leader>pS"] = { "<cmd>PackerStatus<cr>", "Status" },
+    ["<leader>pu"] = { "<cmd>PackerUpdate<cr>", "Update" },
+  },
+}
+
+M.terminal = {
+  n = {
+    ["<leader>t"] = { name = "Terminal" },
+    ["<leader>tn"] = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
+    ["<leader>tu"] = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
+    ["<leader>tt"] = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
+    ["<leader>tp"] = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
+    ["<leader>tf"] = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
+    ["<leader>th"] = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
+    ["<leader>tv"] = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
   },
 }
 

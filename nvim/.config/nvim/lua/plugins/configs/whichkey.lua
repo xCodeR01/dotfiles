@@ -4,14 +4,22 @@ if not present then
 end
 
 wk.setup {
+  plugins = {
+    spelling = {
+      enabled = false,
+    },
+    presets = {
+      operators = false,
+    },
+  },
   icons = {
-    breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-    separator = "  ", -- symbol used between a key and it's label
-    group = "+", -- symbol prepended to a group
+    breadcrumb = "»",
+    separator = "  ",
+    group = "+",
   },
   popup_mappings = {
-    scroll_down = "<c-d>", -- binding to scroll down inside the popup
-    scroll_up = "<c-u>", -- binding to scroll up inside the popup
+    scroll_down = "<c-d>",
+    scroll_up = "<c-u>",
   },
   window = {
     border = "rounded",
