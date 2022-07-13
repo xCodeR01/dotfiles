@@ -6,7 +6,7 @@ local M = {}
 
 M.general = {
   n = {
-    ["<leader>a"] = { "<cmd>Alpha<cr>", "Alpha" },
+    ["<leader>a"] = { "<cmd> Alpha <cr>", "Alpha" },
     ["<leader>h"] = { "<cmd> nohlsearch <CR>", "  No Highlight" },
 
     -- resize window
@@ -24,9 +24,10 @@ M.general = {
     ["<S-h>"] = { ":bprevious<CR>", "Buffer left" },
 
     -- save, close and quit
-    ["<leader>w"] = { "<cmd> w <CR>", "﬚  Save File" },
-    ["<leader>q"] = { "<cmd> q <CR>", "Quit" },
-    ["<leader>c"] = { "<cmd> Bdelete <CR>", "Close buffer" },
+    ["<C-s>"] = { "<cmd> w <CR>", "﬚  Save File" },
+    ["<C-q>"] = { "<cmd> qa <CR>", "Quit Neovim" },
+    ["<leader>q"] = { "<cmd> q <CR>", "Quit Window" },
+    ["<leader>c"] = { "<cmd> Bdelete <CR>", "Close Buffer" },
 
     -- move text
     ["<A-j>"] = { "<Esc>:m .+1<CR>==gi", "Move text up" },
@@ -34,6 +35,7 @@ M.general = {
   },
   i = {
     ["jk"] = { "<Esc>", "Exit insert mode" },
+    ["<C-s>"] = { "<cmd> w <CR>", "﬚  Save File" },
     ["<C-b>"] = { "<ESC>^i", "論 beginning of line" },
     ["<C-e>"] = { "<End>", "壟 end of line" },
   },

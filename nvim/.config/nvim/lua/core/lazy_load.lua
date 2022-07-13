@@ -105,16 +105,4 @@ M.gitsigns = function()
   })
 end
 
-M.bufferline = function()
-  autocmd({ "BufNewFile", "BufRead", "TabEnter" }, {
-    callback = function()
-      if #vim.fn.getbufinfo { buflisted = 1 } >= 2 then
-        vim.schedule(function()
-          require("packer").loader "bufferline.nvim"
-        end)
-      end
-    end,
-  })
-end
-
 return M

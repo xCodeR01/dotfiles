@@ -13,10 +13,9 @@ export SAVEHIST=10000                   # Maximum events in history file
 
 export CARGO_HOME=$HOME/.local/cargo
 
-export PATH=$PATH:$HOME/.local/share/solana/install/active_release/bin
 export PATH=$PATH:$HOME/.yarn/bin
-export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:/usr/local/jdk-17.0.2/bin
+export PATH=$PATH:$HOME/.config/local/share/coursier/bin
+export PATH=$PATH:$HOME/.local/share/solana/install/active_release/bin
 
 # added by third party packages
 . "/home/raven/.local/cargo/env"

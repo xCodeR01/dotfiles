@@ -119,17 +119,15 @@ local function plugins(use)
   -- searching stuff with telescope
   use {
     "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
-    requires = {
-      "nvim-telescope/telescope-media-files.nvim",
-    },
     config = function()
       require "plugins.configs.telescope"
     end,
+    requires = {
+      "nvim-telescope/telescope-media-files.nvim",
+    },
   }
   use {
     "ahmedkhalf/project.nvim",
-    after = "telescope.nvim",
     config = function()
       require "plugins.configs.project"
     end,
@@ -205,9 +203,8 @@ local function plugins(use)
   use {
     "akinsho/bufferline.nvim",
     requires = { "moll/vim-bbye" },
-    setup = function()
-      require("core.lazy_load").bufferline()
-    end,
+    branch = "main",
+    event = "BufWinEnter",
     config = function()
       require "plugins.configs.bufferline"
     end,
@@ -215,7 +212,7 @@ local function plugins(use)
   use {
     "akinsho/toggleterm.nvim",
     tag = 'v1.*',
-    cmd = "ToggleTerm",
+    event = "BufWinEnter",
     config = function()
       require "plugins.configs.toggleterm"
     end,
@@ -235,14 +232,13 @@ local function plugins(use)
 
   -- colorschemes
   use "navarasu/onedark.nvim"
-  -- use "morhetz/gruvbox"
-  -- use "Mofiqul/dracula.nvim"
-  -- use "folke/tokyonight.nvim"
+  use "morhetz/gruvbox"
+  use "Mofiqul/dracula.nvim"
+  use "folke/tokyonight.nvim"
 
   -- load whichkey after all the gui
   use {
     "folke/which-key.nvim",
-    module = "which-key",
     config = function()
       require "plugins.configs.whichkey"
     end,
