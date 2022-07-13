@@ -1,6 +1,7 @@
 vim.cmd "packadd packer.nvim"
 
 local function plugins(use)
+  -- core stuff
   use "wbthomason/packer.nvim"
   use { "nvim-lua/plenary.nvim", module = "plenary" }
   use { "nvim-lua/popup.nvim", module = "popup" }
@@ -10,6 +11,13 @@ local function plugins(use)
       require("impatient").enable_profile()
     end,
   }
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      require "plugins.configs.whichkey"
+    end,
+  }
+  use { "b0o/schemastore.nvim" }
 
   -- cmp and snippets
   use { "rafamadriz/friendly-snippets", module = "cmp_nvim_lsp", event = "InsertEnter" }
@@ -47,15 +55,15 @@ local function plugins(use)
     after = "nvim-lsp-installer",
     module = "lspconfig",
     config = function()
-      require "plugins.configs.lsp_installer"
-      require "plugins.configs.lspconfig"
+      require "lsp.lsp_installer"
+      require "lsp.lspconfig"
     end,
   }
   use {
     "glepnir/lspsaga.nvim",
     after = "nvim-lspconfig",
     config = function()
-      require "plugins.configs.lspsaga"
+      require "lsp.lspsaga"
     end,
   }
   use {
@@ -66,17 +74,10 @@ local function plugins(use)
     end,
   }
   use {
-    "tamago324/nlsp-settings.nvim",
-    after = "nvim-lsp-installer",
-    config = function()
-      require "plugins.configs.nlsp-settings"
-    end,
-  }
-  use {
     "jose-elias-alvarez/null-ls.nvim",
     after = "nvim-lsp-installer",
     config = function()
-      require "plugins.configs.null-ls"
+      require "lsp.null-ls"
     end,
   }
   use { "mfussenegger/nvim-dap", after = "nvim-lspconfig" }
@@ -122,15 +123,16 @@ local function plugins(use)
     config = function()
       require "plugins.configs.telescope"
     end,
-    requires = {
-      "nvim-telescope/telescope-media-files.nvim",
-    },
+    requires = {},
   }
   use {
-    "ahmedkhalf/project.nvim",
-    config = function()
-      require "plugins.configs.project"
-    end,
+    "nvim-telescope/telescope-media-files.nvim",
+    requires = { "nvim-telescope/telescope.nvim" },
+  }
+  use {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    requires = { "nvim-telescope/telescope.nvim" },
+    run = "make",
   }
 
   -- ide stuff
@@ -165,16 +167,6 @@ local function plugins(use)
     end,
   }
   use {
-    "lewis6991/gitsigns.nvim",
-    opt = true,
-    setup = function()
-      require("core.lazy_load").gitsigns()
-    end,
-    config = function()
-      require("plugins.configs.others").gitsigns()
-    end,
-  }
-  use {
     "lukas-reineke/indent-blankline.nvim",
     opt = true,
     setup = function()
@@ -185,7 +177,32 @@ local function plugins(use)
     end,
   }
   use {
-    "NvChad/nvim-colorizer.lua",
+    "lewis6991/gitsigns.nvim",
+    opt = true,
+    setup = function()
+      require("core.lazy_load").gitsigns()
+    end,
+    config = function()
+      require("plugins.configs.others").gitsigns()
+    end,
+  }
+  use {
+    "akinsho/bufferline.nvim",
+    requires = { "moll/vim-bbye" },
+    branch = "main",
+    event = "BufWinEnter",
+    config = function()
+      require "plugins.configs.bufferline"
+    end,
+  }
+  use {
+    "nvim-lualine/lualine.nvim",
+    config = function()
+      require "plugins.configs.lualine"
+    end,
+  }
+  use {
+    "norcalli/nvim-colorizer.lua",
     opt = true,
     setup = function()
       require("core.lazy_load").colorizer()
@@ -201,26 +218,17 @@ local function plugins(use)
     end,
   }
   use {
-    "akinsho/bufferline.nvim",
-    requires = { "moll/vim-bbye" },
-    branch = "main",
-    event = "BufWinEnter",
+    "ahmedkhalf/project.nvim",
     config = function()
-      require "plugins.configs.bufferline"
+      require "plugins.configs.project"
     end,
   }
   use {
     "akinsho/toggleterm.nvim",
-    tag = 'v1.*',
+    tag = "v1.*",
     event = "BufWinEnter",
     config = function()
       require "plugins.configs.toggleterm"
-    end,
-  }
-  use {
-    "nvim-lualine/lualine.nvim",
-    config = function()
-      require "plugins.configs.lualine"
     end,
   }
   use {
@@ -231,18 +239,16 @@ local function plugins(use)
   }
 
   -- colorschemes
-  use "navarasu/onedark.nvim"
-  use "morhetz/gruvbox"
-  use "Mofiqul/dracula.nvim"
-  use "folke/tokyonight.nvim"
-
-  -- load whichkey after all the gui
   use {
-    "folke/which-key.nvim",
+    "navarasu/onedark.nvim",
     config = function()
-      require "plugins.configs.whichkey"
+      require("plugins.configs.colorschemes").onedark()
     end,
+    disable = false,
   }
+  use { "morhetz/gruvbox", disable = true }
+  use { "Mofiqul/dracula.nvim", disable = true }
+  use { "folke/tokyonight.nvim", disable = true }
 end
 
 require("core.packer").run(plugins)

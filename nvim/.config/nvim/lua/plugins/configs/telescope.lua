@@ -91,11 +91,22 @@ telescope.setup {
       filetypes = { "png", "webp", "jpg", "jpeg" },
       find_cmd = "fd",
     },
+    live_grep = {
+      only_sort_text = true,
+    },
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = "smart_case",
+    },
   },
 }
 
-local extensions_list = { "media_files" }
+local extensions_list = { "media_files", "fzf" }
 
-for _, ext in ipairs(extensions_list) do
-  telescope.load_extension(ext)
-end
+pcall(function()
+  for _, ext in ipairs(extensions_list) do
+    telescope.load_extension(ext)
+  end
+end)

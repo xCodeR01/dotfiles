@@ -8,7 +8,6 @@ autocmd("BufEnter", {
 
 -- core setup
 require "core.options"
-require "core.themes".onedark()
 
 vim.defer_fn(function()
   local mappings = require "core.mappings"

@@ -23,6 +23,10 @@ M.load_mappings = function(mappings, mapping_opt)
   for _, section_mappings in pairs(mappings) do
     for mode, mode_mappings in pairs(section_mappings) do
       for keybind, mapping_info in pairs(mode_mappings) do
+        -- handle ["key"] = { name = "+prefix"} map if wk is not present
+        -- if not whichkey_exists and mapping_info.name ~= nil then
+        --   return
+        -- end
         -- merge default + user opts
         local default_opts = merge_tb("force", { mode = mode }, mapping_opt or {})
         local opts = merge_tb("force", default_opts, mapping_info.opts or {})
