@@ -5,6 +5,12 @@ end
 local M = {}
 
 M.general = {
+  i = {
+    ["jk"] = { "<Esc>", "Exit insert mode" },
+    ["<C-s>"] = { "<cmd> w <CR>", "﬚  Save File" },
+    ["<C-b>"] = { "<ESC>^i", "論 beginning of line" },
+    ["<C-e>"] = { "<End>", "壟 end of line" },
+  },
   n = {
     ["<leader>a"] = { "<cmd> Alpha <cr>", "Alpha" },
     ["<leader>h"] = { "<cmd> nohlsearch <CR>", "  No Highlight" },
@@ -32,27 +38,38 @@ M.general = {
     -- move text
     ["<A-j>"] = { "<Esc>:m .+1<CR>==gi", "Move text up" },
     ["<A-k>"] = { "<Esc>:m .-2<CR>==gi", "Move text down" },
-  },
-  i = {
-    ["jk"] = { "<Esc>", "Exit insert mode" },
-    ["<C-s>"] = { "<cmd> w <CR>", "﬚  Save File" },
-    ["<C-b>"] = { "<ESC>^i", "論 beginning of line" },
-    ["<C-e>"] = { "<End>", "壟 end of line" },
+
+    -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
+    -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
+    -- empty mode is same as using <cmd> :map
+    -- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
+    ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+    ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
+    ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
+    ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
   },
   v = {
     ["<A-j>"] = { ":m .+1<CR>==", "Move text up" },
     ["<A-k>"] = { ":m .-2<CR>==", "Move text down" },
-    p = { '"_dP', "" },
+
+    ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+    ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
+    ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
+    ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+
+    -- Don't copy the replaced text after pasting in visual mode
+    -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
+    ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', opts = { silent = true } },
 
     -- Stay in indent mode
     ["<"] = { "<gv", "" },
     [">"] = { ">gv", "" },
   },
   x = {
-    -- keymap("x", "J", ":move '>+1<CR>gv-gv")
-    -- keymap("x", "K", ":move '<-2<CR>gv-gv")
-    -- keymap("x", "<A-j>", ":move '>+1<CR>gv-gv")
-    -- keymap("x", "<A-k>", ":move '<-2<CR>gv-gv")
+    ["J"] = { ":move '>+1<CR>gv-gv", "" },
+    ["K"] = { ":move '<-2<CR>gv-gv", "" },
+    ["<A-j>"] = { ":move '>+1<CR>gv-gv", "" },
+    ["<A-k>"] = { ":move '<-2<CR>gv-gv", "" },
   },
 
   t = {
@@ -61,7 +78,6 @@ M.general = {
 }
 
 M.comment = {
-
   -- toggle comment in both modes
   n = {
     ["<leader>/"] = {
@@ -84,20 +100,22 @@ M.nvimtree = {
   },
 }
 
+M.lsp = {
+  n = {
+    ["<leader>l"] = { name = "LSP" },
+    ["<leader>li"] = { "<cmd>LspInfo<cr>", "Info" },
+    ["<leader>lI"] = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
+  },
+}
+
 M.telescope = {
   n = {
-    ["<leader>f"] = {
-      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-      "  Find Files",
-    },
-    ["<leader>F"] = { "<cmd> Telescope live_grep theme=ivy<CR>", "  Live grep" },
-    ["<leader>b"] = {
-      "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-      "Buffers",
-    },
-    ["<leader>P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+    ["<leader>f"] = { "<cmd> Telescope find_files theme=dropdown previewer=false<cr>", "  Find Files" },
+    ["<leader>F"] = { "<cmd> Telescope live_grep theme=ivy <CR>", "  Live grep" },
+    ["<leader>b"] = { "<cmd> Telescope buffers theme=dropdown previewer=false <cr>", "Buffers" },
+    ["<leader>P"] = { "<cmd> Telescope projects <cr>", "Projects" },
+
     ["<leader>s"] = { name = "Search" },
-    ["<leader>sa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find All Files" },
     ["<leader>sc"] = { "<cmd> Telescope colorscheme<cr>", "Colorscheme" },
     ["<leader>sh"] = { "<cmd> Telescope help_tags<cr>", "Find Help" },
     ["<leader>sr"] = { "<cmd> Telescope oldfiles<cr>", "Open Recent File" },
@@ -112,23 +130,18 @@ M.telescope = {
   },
 }
 
--- M.whichkey = {
---   n = {
---     ["<leader>wK"] = {
---       function()
---         vim.cmd "WhichKey"
---       end,
---       "  which-key all keymaps",
---     },
---     ["<leader>wk"] = {
---       function()
---         local input = vim.fn.input "WhichKey: "
---         vim.cmd("WhichKey " .. input)
---       end,
---       "  which-key query lookup",
---     },
---   },
--- }
+M.whichkey = {
+  n = {
+    ["<leader>wK"] = { "<cmd> WhichKey <cr", "  which-key all keymaps" },
+    ["<leader>wk"] = {
+      function()
+        local input = vim.fn.input "WhichKey: "
+        vim.cmd("WhichKey " .. input)
+      end,
+      "  which-key query lookup",
+    },
+  },
+}
 
 -- M.blankline = {
 --   n = {

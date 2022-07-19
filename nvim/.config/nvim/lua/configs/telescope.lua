@@ -11,7 +11,7 @@ telescope.setup {
     prompt_prefix = " ",
     selection_caret = " ",
     path_display = { "smart" },
-    file_ignore_patterns = { "node_modules", "build" },
+    file_ignore_patterns = { "^.git/", "^build/" },
     mappings = {
       i = {
         ["<Down>"] = actions.cycle_history_next,
@@ -79,20 +79,20 @@ telescope.setup {
     "--column",
     "--smart-case",
     "--hidden",
-    "--glob=!.git/",
   },
+  -- make sure rg and fd are available, as they honor .gitignore
   pickers = {
     find_files = {
       hidden = true,
+    },
+    grep_string = {
+      only_sort_text = true,
     },
   },
   extensions = {
     media_files = {
       filetypes = { "png", "webp", "jpg", "jpeg" },
       find_cmd = "fd",
-    },
-    live_grep = {
-      only_sort_text = true,
     },
     fzf = {
       fuzzy = true,

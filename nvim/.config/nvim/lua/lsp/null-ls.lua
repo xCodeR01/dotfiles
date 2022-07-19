@@ -20,6 +20,8 @@ null_ls.setup {
     },
     diagnostics.flake8,
     formatting.black,
+    -- diagnostics.golangci_lint,
+    formatting.gofmt,
     formatting.stylua,
   },
 }

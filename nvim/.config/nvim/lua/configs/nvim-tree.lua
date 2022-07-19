@@ -3,12 +3,11 @@ if not present then
   return
 end
 
+local diag_icons = require("ui.icons").diagnostics
+
 -- docs => https://github.com/kyazdani42/nvim-tree.lua#setup
 nvim_tree.setup {
-  disable_netrw = true,
   hijack_netrw = true,
-  hijack_cursor = false,
-  open_on_setup = false,
   ignore_ft_on_setup = {
     "startify",
     "dashboard",
@@ -24,23 +23,24 @@ nvim_tree.setup {
     enable = true,
     show_on_dirs = false,
     icons = {
-      hint = "",
-      info = "",
-      warning = "",
-      error = "",
+      error = diag_icons.error,
+      warning = diag_icons.warn,
+      hint = diag_icons.hint,
+      info = diag_icons.info,
     },
   },
+  git = {
+    ignore = false,
+  },
   filters = {
-    custom = { "^\\.git" },
+    custom = { "^.git$" },
   },
   view = {
     width = 25,
     hide_root_folder = true,
-    side = "left",
     adaptive_size = true,
     -- to see default mapping use `:help nvim-tree.view.mappings`
     mappings = {
-      custom_only = false,
       list = {
         { key = { "<CR>", "o", "l" }, action = "edit" },
         { key = "h", action = "close_node" },
@@ -49,11 +49,12 @@ nvim_tree.setup {
     },
   },
   renderer = {
+    group_empty = false,
+    highlight_git = true,
+    highlight_opened_files = "none",
     icons = {
       webdev_colors = true,
       git_placement = "before",
-      padding = " ",
-      symlink_arrow = " ➛ ",
       show = {
         git = true,
         file = true,
@@ -61,15 +62,8 @@ nvim_tree.setup {
         folder_arrow = true,
       },
       glyphs = {
-        default = "",
+        default = "",
         symlink = "",
-        folder = {
-          default = "",
-          open = "",
-          empty = "",
-          empty_open = "",
-          symlink = "",
-        },
         git = {
           unstaged = "",
           staged = "S",
@@ -77,7 +71,7 @@ nvim_tree.setup {
           renamed = "➜",
           deleted = "",
           untracked = "U",
-          ignored = "◌",
+          ignored = "",
         },
       },
     },

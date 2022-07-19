@@ -5,13 +5,50 @@ end
 
 require "ui.lsp"
 
+local lsp_mappings = {
+  n = {
+    -- lspsaga integration
+    ["gh"] = { "<cmd>Lspsaga lsp_finder<CR>", "LSP finder" },
+    ["K"] = { "<cmd>Lspsaga hover_doc<CR>", "Hover doc" },
+    ["gx"] = { "<Cmd>Lspsaga signature_help<CR>", "Signature help" },
+    ["gd"] = { "<cmd>Lspsaga preview_definition<CR>", "Preview defintion" },
+    ["gi"] = { "<cmd>Lspsaga implment<CR>", "Show implementation" },
+    ["gl"] = { "<cmd>Lspsaga show_line_diagnostics<CR>", "Show line diagnostics" },
+    ["gr"] = { "<cmd>Lspsaga rename<CR>", "LSP rename" },
+    ["[d"] = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Goto prev diagnostic" },
+    ["]d"] = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "Goto next diagnostic" },
+    ["<C-u>"] = {
+      "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(2)",
+      "Scroll up in saga",
+    },
+    ["<C-d>"] = {
+      "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-2)",
+      "Scroll down in saga",
+    },
+    ["<leader>la"] = { "<cmd>Lspsaga code_action<CR>", "Code Actions" },
+    -- built-in lsp
+    ["<leader>lf"] = { "<cmd>lua vim.lsp.buf.formatting{async=true}<CR>", " lsp formatting" },
+    ["<leader>ll"] = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
+    ["<leader>lq"] = { "<cmd>lua vim.lsp.diagnostic.setloclist()<cr>", "Quickfix" },
+    ["<leader>lA"] = { "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", " add workspace folder" },
+    ["<leader>lR"] = { "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", " remove workspace folder" },
+    -- telescope integration
+    ["<leader>lw"] = { "<cmd>Telescope diagnostics<cr>", "Workspace Diagnostics" },
+    ["<leader>ld"] = { "<cmd>Telescope diagnostics bufnr=0<cr>", "Document Diagnostics" },
+    ["<leader>ls"] = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+    ["<leader>lS"] = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
+  },
+  v = {
+    ["<leader>la"] = { "<cmd><C-U>Lspsaga range_code_action<CR>", "Code Actions" },
+  },
+}
+
 local function on_attach(client, bufnr)
   client.resolved_capabilities.document_formatting = false
   client.resolved_capabilities.document_range_formatting = false
 
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
-  local lsp_mappings = require "lsp.mappings"
   require("core.utils").load_mappings({ lsp_mappings }, { buffer = bufnr })
 
   local ill_present, illuminate = pcall(require, "illuminate")
@@ -53,7 +90,7 @@ lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_c
 local lsp_installer = require "nvim-lsp-installer"
 local server_opts = require "lsp.server-opts"
 
--- init lsp servers
+-- init lsp servers with custom opts if available
 for _, server in ipairs(lsp_installer.get_installed_servers()) do
   local opts = server_opts[server.name] or {}
   lspconfig[server.name].setup(opts)

@@ -8,6 +8,7 @@ M.lazy_load = function(tb)
     callback = function()
       if tb.condition() then
         vim.api.nvim_del_augroup_by_name(tb.augroup_name)
+
         -- dont defer for treesitter as it will show slow highlighting
         -- This deferring only happens only when we do "nvim filename"
         if tb.plugins ~= "nvim-treesitter" then
@@ -27,13 +28,9 @@ M.colorizer = function()
     events = { "BufRead", "BufNewFile" },
     augroup_name = "ColorizerLazy",
     plugins = "nvim-colorizer.lua",
+
     condition = function()
-      local items = { "#", "rgb", "hsl", "rgba", "hsla" }
-      for _, val in ipairs(items) do
-        if vim.fn.search(val) ~= 0 then
-          return true
-        end
-      end
+      return true
     end,
   }
 end

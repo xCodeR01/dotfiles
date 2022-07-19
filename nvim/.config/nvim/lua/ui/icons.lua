@@ -40,6 +40,13 @@ M.lspkind = {
   Package = "",
 }
 
+M.diagnostics = {
+  error = "",
+  warn = "",
+  info = "",
+  hint = "",
+}
+
 M.statusline_separators = {
   default = {
     left = "",

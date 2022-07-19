@@ -14,7 +14,7 @@ local function plugins(use)
   use {
     "folke/which-key.nvim",
     config = function()
-      require "plugins.configs.whichkey"
+      require "configs.whichkey"
     end,
   }
   use { "b0o/schemastore.nvim" }
@@ -25,14 +25,14 @@ local function plugins(use)
     "L3MON4D3/LuaSnip",
     after = "friendly-snippets",
     config = function()
-      require("plugins.configs.others").luasnip()
+      require("configs.others").luasnip()
     end,
   }
   use {
     "hrsh7th/nvim-cmp",
     after = "LuaSnip",
     config = function()
-      require "plugins.configs.cmp"
+      require "configs.cmp"
     end,
   }
   use { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" }
@@ -61,16 +61,10 @@ local function plugins(use)
   }
   use {
     "glepnir/lspsaga.nvim",
-    after = "nvim-lspconfig",
-    config = function()
-      require "lsp.lspsaga"
-    end,
-  }
-  use {
-    "RRethy/vim-illuminate",
+    branch = "main",
     after = "nvim-lsp-installer",
     config = function()
-      require("plugins.configs.others").illuminate()
+      require "lsp.lspsaga"
     end,
   }
   use {
@@ -80,19 +74,20 @@ local function plugins(use)
       require "lsp.null-ls"
     end,
   }
-  use { "mfussenegger/nvim-dap", after = "nvim-lspconfig" }
+
+  -- debug stuff
   use {
-    "ravenxrz/DAPInstall.nvim",
-    after = "nvim-dap",
+    "mfussenegger/nvim-dap",
+    module = "dap",
     config = function()
-      require("plugins.configs.dap").dap_install()
+      require("configs.dap").setup()
     end,
   }
   use {
     "rcarriga/nvim-dap-ui",
     after = "nvim-dap",
     config = function()
-      require("plugins.configs.dap").dapui()
+      require("configs.dap").dapui()
     end,
   }
 
@@ -106,7 +101,7 @@ local function plugins(use)
     cmd = require("core.lazy_load").treesitter_cmds,
     run = ":TSUpdate",
     config = function()
-      require "plugins.configs.treesitter"
+      require "configs.treesitter"
     end,
   }
   use { "JoosepAlviste/nvim-ts-context-commentstring", after = "nvim-treesitter" }
@@ -121,7 +116,7 @@ local function plugins(use)
   use {
     "nvim-telescope/telescope.nvim",
     config = function()
-      require "plugins.configs.telescope"
+      require "configs.telescope"
     end,
     requires = {},
   }
@@ -140,7 +135,7 @@ local function plugins(use)
     "kyazdani42/nvim-web-devicons",
     module = "nvim-web-devicons",
     config = function()
-      require("plugins.configs.others").devicons()
+      require("configs.others").devicons()
     end,
   }
   use {
@@ -148,14 +143,20 @@ local function plugins(use)
     ft = "alpha",
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
     config = function()
-      require "plugins.configs.nvim-tree"
+      require "configs.nvim-tree"
+    end,
+  }
+  use {
+    "RRethy/vim-illuminate",
+    config = function()
+      require("configs.others").illuminate()
     end,
   }
   use {
     "windwp/nvim-autopairs",
     after = "nvim-cmp",
     config = function()
-      require("plugins.configs.others").autopairs()
+      require("configs.others").autopairs()
     end,
   }
   use {
@@ -163,7 +164,7 @@ local function plugins(use)
     module = "Comment",
     keys = { "gc", "gb" },
     config = function()
-      require("plugins.configs.others").comment()
+      require("configs.others").comment()
     end,
   }
   use {
@@ -173,7 +174,7 @@ local function plugins(use)
       require("core.lazy_load").on_file_open "indent-blankline.nvim"
     end,
     config = function()
-      require("plugins.configs.others").blankline()
+      require("configs.others").blankline()
     end,
   }
   use {
@@ -183,7 +184,7 @@ local function plugins(use)
       require("core.lazy_load").gitsigns()
     end,
     config = function()
-      require("plugins.configs.others").gitsigns()
+      require("configs.others").gitsigns()
     end,
   }
   use {
@@ -192,13 +193,13 @@ local function plugins(use)
     branch = "main",
     event = "BufWinEnter",
     config = function()
-      require "plugins.configs.bufferline"
+      require "configs.bufferline"
     end,
   }
   use {
     "nvim-lualine/lualine.nvim",
     config = function()
-      require "plugins.configs.lualine"
+      require "configs.lualine"
     end,
   }
   use {
@@ -208,19 +209,19 @@ local function plugins(use)
       require("core.lazy_load").colorizer()
     end,
     config = function()
-      require("plugins.configs.others").colorizer()
+      require("configs.others").colorizer()
     end,
   }
   use {
     "goolord/alpha-nvim",
     config = function()
-      require "plugins.configs.alpha"
+      require "configs.alpha"
     end,
   }
   use {
     "ahmedkhalf/project.nvim",
     config = function()
-      require "plugins.configs.project"
+      require "configs.project"
     end,
   }
   use {
@@ -228,13 +229,13 @@ local function plugins(use)
     tag = "v1.*",
     event = "BufWinEnter",
     config = function()
-      require "plugins.configs.toggleterm"
+      require "configs.toggleterm"
     end,
   }
   use {
     "ggandor/lightspeed.nvim",
     config = function()
-      require("plugins.configs.others").lightspeed()
+      require("configs.others").lightspeed()
     end,
   }
 
@@ -242,7 +243,7 @@ local function plugins(use)
   use {
     "navarasu/onedark.nvim",
     config = function()
-      require("plugins.configs.colorschemes").onedark()
+      require("configs.colorschemes").onedark()
     end,
     disable = false,
   }

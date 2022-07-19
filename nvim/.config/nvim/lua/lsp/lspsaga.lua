@@ -3,36 +3,27 @@ if not present then
   return
 end
 
+local diag_icons = require("ui.icons").diagnostics
+
 -- docs => https://github.com/glepnir/lspsaga.nvim#configuration
 saga.init_lsp_saga {
   border_style = "rounded",
-  move_in_saga = { prev = "<C-k>", next = "<C-j>" },
-  diagnostic_header = { "", "", "", "" },
-  show_diagnostic_source = true,
-  diagnostic_source_bracket = {},
-  code_action_icon = "",
-  code_action_num_shortcut = true,
   code_action_lightbulb = {
-    enable = true,
-    sign = true,
-    sign_priority = 20,
-    virtual_text = true,
+    enable = false,
   },
-  finder_separator = "  ",
-  max_preview_lines = 15,
-  finder_action_keys = {
-    open = "o",
-    vsplit = "s",
-    split = "i",
-    tabe = "t",
-    quit = "q",
-    scroll_up = "<C-u>",
-    scroll_down = "<C-d>",
+  diagnostic_header = {
+    diag_icons.error,
+    diag_icons.warn,
+    diag_icons.info,
+    diag_icons.hint,
   },
+  diagnostic_source_bracket = { "<", ">" },
   definition_preview_icon = " ",
-  code_action_keys = {
-    quit = "q",
-    exec = "<CR>",
+  finder_icons = {
+    def = "  ",
+    ref = "諭 ",
+    link = "  ",
   },
+  max_preview_lines = 12,
   rename_action_quit = "<C-e>",
 }

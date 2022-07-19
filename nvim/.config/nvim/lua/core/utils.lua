@@ -5,28 +5,28 @@ local merge_tb = vim.tbl_deep_extend
 
 M.load_mappings = function(mappings, mapping_opt)
   -- set mapping function with/without whichkey
-  local map_func
+  local set_maps
   local whichkey_exists, wk = pcall(require, "which-key")
 
   if whichkey_exists then
-    map_func = function(keybind, mapping_info, opts)
+    set_maps = function(keybind, mapping_info, opts)
       wk.register({ [keybind] = mapping_info }, opts)
     end
   else
-    map_func = function(keybind, mapping_info, opts)
+    set_maps = function(keybind, mapping_info, opts)
       local mode = opts.mode
       opts.mode = nil
       vim.keymap.set(mode, keybind, mapping_info[1], opts)
     end
   end
 
-  for _, section_mappings in pairs(mappings) do
-    for mode, mode_mappings in pairs(section_mappings) do
-      for keybind, mapping_info in pairs(mode_mappings) do
+  for _, section in pairs(mappings) do
+    for mode, mode_values in pairs(section) do
+      for keybind, mapping_info in pairs(mode_values) do
         -- handle ["key"] = { name = "+prefix"} map if wk is not present
-        -- if not whichkey_exists and mapping_info.name ~= nil then
-        --   return
-        -- end
+        if mapping_info.name and not whichkey_exists then
+          return
+        end
         -- merge default + user opts
         local default_opts = merge_tb("force", { mode = mode }, mapping_opt or {})
         local opts = merge_tb("force", default_opts, mapping_info.opts or {})
@@ -35,7 +35,7 @@ M.load_mappings = function(mappings, mapping_opt)
           mapping_info.opts = nil
         end
 
-        map_func(keybind, mapping_info, opts)
+        set_maps(keybind, mapping_info, opts)
       end
     end
   end
