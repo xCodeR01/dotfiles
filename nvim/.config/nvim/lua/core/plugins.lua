@@ -17,7 +17,12 @@ local function plugins(use)
       require "configs.whichkey"
     end,
   }
-  use { "b0o/schemastore.nvim" }
+  use {
+    "rmagatti/auto-session",
+    config = function()
+      require("configs.others").auto_session()
+    end,
+  }
 
   -- cmp and snippets
   use { "rafamadriz/friendly-snippets", module = "cmp_nvim_lsp", event = "InsertEnter" }
@@ -41,7 +46,7 @@ local function plugins(use)
   use { "hrsh7th/cmp-buffer", after = "cmp-nvim-lsp" }
   use { "hrsh7th/cmp-path", after = "cmp-buffer" }
 
-  -- lsp and dap
+  -- lsp stuff
   use {
     "williamboman/nvim-lsp-installer",
     opt = true,
@@ -55,9 +60,11 @@ local function plugins(use)
     after = "nvim-lsp-installer",
     module = "lspconfig",
     config = function()
+      -- don't change this load order
       require "lsp.lsp_installer"
       require "lsp.lspconfig"
     end,
+    requires = { "b0o/schemastore.nvim" },
   }
   use {
     "glepnir/lspsaga.nvim",
@@ -104,30 +111,26 @@ local function plugins(use)
       require "configs.treesitter"
     end,
   }
-  use { "JoosepAlviste/nvim-ts-context-commentstring", after = "nvim-treesitter" }
+  use {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    after = "nvim-treesitter",
+  }
   use {
     "windwp/nvim-ts-autotag",
-    ft = { "html", "javascriptreact", "typescriptreact" },
     after = "nvim-treesitter",
   }
   use { "p00f/nvim-ts-rainbow", after = "nvim-treesitter" }
 
-  -- searching stuff with telescope
+  -- telescope stuff
   use {
     "nvim-telescope/telescope.nvim",
     config = function()
       require "configs.telescope"
     end,
-    requires = {},
-  }
-  use {
-    "nvim-telescope/telescope-media-files.nvim",
-    requires = { "nvim-telescope/telescope.nvim" },
-  }
-  use {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    requires = { "nvim-telescope/telescope.nvim" },
-    run = "make",
+    requires = {
+      { "nvim-telescope/telescope-media-files.nvim" },
+      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+    },
   }
 
   -- ide stuff
@@ -147,16 +150,20 @@ local function plugins(use)
     end,
   }
   use {
-    "RRethy/vim-illuminate",
+    "lukas-reineke/indent-blankline.nvim",
+    opt = true,
+    setup = function()
+      require("core.lazy_load").on_file_open "indent-blankline.nvim"
+    end,
     config = function()
-      require("configs.others").illuminate()
+      require "configs.blankline"
     end,
   }
   use {
     "windwp/nvim-autopairs",
     after = "nvim-cmp",
     config = function()
-      require("configs.others").autopairs()
+      require "configs.autopairs"
     end,
   }
   use {
@@ -164,17 +171,28 @@ local function plugins(use)
     module = "Comment",
     keys = { "gc", "gb" },
     config = function()
-      require("configs.others").comment()
+      require "configs.comment"
     end,
   }
   use {
-    "lukas-reineke/indent-blankline.nvim",
-    opt = true,
-    setup = function()
-      require("core.lazy_load").on_file_open "indent-blankline.nvim"
-    end,
+    "RRethy/vim-illuminate",
     config = function()
-      require("configs.others").blankline()
+      require("configs.others").illuminate()
+    end,
+  }
+  use {
+    "akinsho/bufferline.nvim",
+    branch = "main",
+    event = "BufWinEnter",
+    config = function()
+      require "configs.bufferline"
+    end,
+    requires = { "moll/vim-bbye" },
+  }
+  use {
+    "nvim-lualine/lualine.nvim",
+    config = function()
+      require "configs.lualine"
     end,
   }
   use {
@@ -184,22 +202,7 @@ local function plugins(use)
       require("core.lazy_load").gitsigns()
     end,
     config = function()
-      require("configs.others").gitsigns()
-    end,
-  }
-  use {
-    "akinsho/bufferline.nvim",
-    requires = { "moll/vim-bbye" },
-    branch = "main",
-    event = "BufWinEnter",
-    config = function()
-      require "configs.bufferline"
-    end,
-  }
-  use {
-    "nvim-lualine/lualine.nvim",
-    config = function()
-      require "configs.lualine"
+      require "configs.gitsigns"
     end,
   }
   use {
@@ -213,15 +216,15 @@ local function plugins(use)
     end,
   }
   use {
-    "goolord/alpha-nvim",
-    config = function()
-      require "configs.alpha"
-    end,
-  }
-  use {
     "ahmedkhalf/project.nvim",
     config = function()
       require "configs.project"
+    end,
+  }
+  use {
+    "goolord/alpha-nvim",
+    config = function()
+      require "configs.alpha"
     end,
   }
   use {

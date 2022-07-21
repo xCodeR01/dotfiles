@@ -85,9 +85,6 @@ telescope.setup {
     find_files = {
       hidden = true,
     },
-    grep_string = {
-      only_sort_text = true,
-    },
   },
   extensions = {
     media_files = {

@@ -4,6 +4,11 @@ if not present then
 end
 
 wk.setup {
+  icons = {
+    breadcrumb = "»",
+    separator = "  ",
+    group = "+",
+  },
   plugins = {
     spelling = {
       enabled = false,
@@ -12,14 +17,12 @@ wk.setup {
       operators = false,
     },
   },
-  icons = {
-    breadcrumb = "»",
-    separator = "  ",
-    group = "+",
-  },
   popup_mappings = {
     scroll_down = "<c-d>",
     scroll_up = "<c-u>",
+  },
+  layout = {
+    spacing = 4, -- spacing between columns
   },
   window = {
     border = "rounded",
@@ -28,12 +31,9 @@ wk.setup {
     padding = { 2, 2, 2, 2 },
     winblend = 0,
   },
-  layout = {
-    spacing = 4, -- spacing between columns
-  },
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
+  -- list of mode / prefixes that should never be hooked by WhichKey
   triggers_blacklist = {
-    -- list of mode / prefixes that should never be hooked by WhichKey
     i = { "j", "k" },
     v = { "j", "k" },
   },

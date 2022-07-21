@@ -51,7 +51,7 @@ nvim_tree.setup {
   renderer = {
     group_empty = false,
     highlight_git = true,
-    highlight_opened_files = "none",
+    highlight_opened_files = "all",
     icons = {
       webdev_colors = true,
       git_placement = "before",

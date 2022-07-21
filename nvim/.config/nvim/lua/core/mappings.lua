@@ -11,6 +11,7 @@ M.general = {
     ["<C-b>"] = { "<ESC>^i", "論 beginning of line" },
     ["<C-e>"] = { "<End>", "壟 end of line" },
   },
+
   n = {
     ["<leader>a"] = { "<cmd> Alpha <cr>", "Alpha" },
     ["<leader>h"] = { "<cmd> nohlsearch <CR>", "  No Highlight" },
@@ -47,7 +48,11 @@ M.general = {
     ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
     ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
     ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+
+    -- open link in browser, only for unix
+    ["gx"] = { '<cmd>call jobstart(["xdg-open", expand("<cfile>")], {"detach": v:true})<cr>', "Open link" },
   },
+
   v = {
     ["<A-j>"] = { ":m .+1<CR>==", "Move text up" },
     ["<A-k>"] = { ":m .-2<CR>==", "Move text down" },
@@ -62,14 +67,15 @@ M.general = {
     ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', opts = { silent = true } },
 
     -- Stay in indent mode
-    ["<"] = { "<gv", "" },
-    [">"] = { ">gv", "" },
+    ["<"] = { "<gv", opts = { silent = true } },
+    [">"] = { ">gv", opts = { silent = true } },
   },
+
   x = {
-    ["J"] = { ":move '>+1<CR>gv-gv", "" },
-    ["K"] = { ":move '<-2<CR>gv-gv", "" },
-    ["<A-j>"] = { ":move '>+1<CR>gv-gv", "" },
-    ["<A-k>"] = { ":move '<-2<CR>gv-gv", "" },
+    ["J"] = { ":m '>+1<CR>gv-gv", "" },
+    ["K"] = { ":m '<-2<CR>gv-gv", "" },
+    ["<A-j>"] = { ":m '>+1<CR>gv-gv", "Move text up" },
+    ["<A-k>"] = { ":m '<-2<CR>gv-gv", "Move text down" },
   },
 
   t = {
@@ -142,26 +148,6 @@ M.whichkey = {
     },
   },
 }
-
--- M.blankline = {
---   n = {
---     ["<leader>bc"] = {
---       function()
---         local ok, start = require("indent_blankline.utils").get_current_context(
---           vim.g.indent_blankline_context_patterns,
---           vim.g.indent_blankline_use_treesitter_scope
---         )
-
---         if ok then
---           vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { start, 0 })
---           vim.cmd [[normal! _]]
---         end
---       end,
-
---       " Jump to current_context",
---     },
---   },
--- }
 
 M.gitsigns = {
   n = {
