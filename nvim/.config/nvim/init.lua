@@ -9,9 +9,11 @@ autocmd("FileType", {
 })
 
 -- don't auto-comment newlines
-autocmd("BufEnter", {
+autocmd(
+  {"BufWinEnter", "BufRead" ,"BufNewFile"} , 
+  {
   pattern = "*",
-  command = "set fo-=c fo-=r fo-=o",
+  command = "setlocal fo-=c fo-=r fo-=o",
 })
 
 -- core setup

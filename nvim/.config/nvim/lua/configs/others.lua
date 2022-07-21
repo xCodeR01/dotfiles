@@ -110,7 +110,7 @@ M.luasnip = function()
 end
 
 M.copilot = function()
-  vim.cmd [[ imap <silent><script><expr> <C-l> copilot#Accept() ]]
+  vim.api.nvim_set_keymap("i", "<C-l>", "copilot#Accept()", { silent = true, expr = true })
   vim.g.copilot_no_tab_map = true
   vim.g.copilot_filetypes = {
     ["markdown"] = false,
