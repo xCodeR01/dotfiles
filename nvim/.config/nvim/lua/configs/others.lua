@@ -109,4 +109,12 @@ M.luasnip = function()
   })
 end
 
+M.copilot = function()
+  vim.cmd [[ imap <silent><script><expr> <C-l> copilot#Accept() ]]
+  vim.g.copilot_no_tab_map = true
+  vim.g.copilot_filetypes = {
+    ["markdown"] = false,
+  }
+end
+
 return M

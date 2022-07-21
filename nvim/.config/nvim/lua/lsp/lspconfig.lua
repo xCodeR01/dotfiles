@@ -10,7 +10,7 @@ local lsp_mappings = {
     -- lspsaga integration
     ["gh"] = { "<cmd>Lspsaga lsp_finder<CR>", "LSP finder" },
     ["K"] = { "<cmd>Lspsaga hover_doc<CR>", "Hover doc" },
-    ["gS"] = { "<Cmd>Lspsaga signature_help<CR>", "Signature help" },
+    ["gy"] = { "<Cmd>Lspsaga signature_help<CR>", "Signature help" },
     ["gd"] = { "<cmd>Lspsaga preview_definition<CR>", "Preview defintion" },
     ["gi"] = { "<cmd>Lspsaga implment<CR>", "Show implementation" },
     ["gl"] = { "<cmd>Lspsaga show_line_diagnostics<CR>", "Show line diagnostics" },

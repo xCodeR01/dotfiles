@@ -235,12 +235,6 @@ local function plugins(use)
       require "configs.toggleterm"
     end,
   }
-  use {
-    "ggandor/lightspeed.nvim",
-    config = function()
-      require("configs.others").lightspeed()
-    end,
-  }
 
   -- colorschemes
   use {
@@ -253,6 +247,22 @@ local function plugins(use)
   use { "morhetz/gruvbox", disable = true }
   use { "Mofiqul/dracula.nvim", disable = true }
   use { "folke/tokyonight.nvim", disable = true }
+
+  -- extra stuff
+  use {
+    "ggandor/lightspeed.nvim",
+    config = function()
+      require("configs.others").lightspeed()
+    end,
+  }
+  use {
+    "github/copilot.vim",
+    event = "InsertEnter",
+    cmd = { "Copilot" },
+    config = function()
+      vim.schedule(require("configs.others").copilot)
+    end,
+  }
 end
 
 require("core.packer").run(plugins)

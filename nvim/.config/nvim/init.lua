@@ -17,7 +17,6 @@ autocmd("BufEnter", {
 -- core setup
 require "core.options"
 
-vim.api.nvim_del_keymap('n', '<C-l>')
 vim.defer_fn(function()
   local mappings = require "core.mappings"
   mappings.lspconfig = nil -- handled in lspconfig.lua

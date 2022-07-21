@@ -16,12 +16,6 @@ M.general = {
     ["<leader>a"] = { "<cmd> Alpha <cr>", "Alpha" },
     ["<leader>h"] = { "<cmd> nohlsearch <CR>", "  No Highlight" },
 
-    -- resize window
-    ["<C-Up>"] = { ":resize +2<CR>", "Increase window height" },
-    ["<C-Down>"] = { ":resize -2<CR>", "Decrease window height" },
-    ["<C-Left>"] = { ":vertical resize -2<CR>", "Decrease window width" },
-    ["<C-Right>"] = { ":vertical resize +2<CR>", "Increase window width" },
-
     -- switch between windows and buffers
     ["<C-h>"] = { "<C-w>h", " window left" },
     ["<C-l>"] = { "<C-w>l", " window right" },
@@ -30,15 +24,17 @@ M.general = {
     ["<S-l>"] = { ":bnext<CR>", "Buffer right" },
     ["<S-h>"] = { ":bprevious<CR>", "Buffer left" },
 
+    -- resize window
+    ["<C-Up>"] = { ":resize +2<CR>", "Increase window height" },
+    ["<C-Down>"] = { ":resize -2<CR>", "Decrease window height" },
+    ["<C-Left>"] = { ":vertical resize -2<CR>", "Decrease window width" },
+    ["<C-Right>"] = { ":vertical resize +2<CR>", "Increase window width" },
+
     -- save, close and quit
     ["<C-s>"] = { "<cmd> w <CR>", "﬚  Save File" },
     ["<C-q>"] = { "<cmd> qa <CR>", "Quit Neovim" },
     ["<leader>q"] = { "<cmd> q <CR>", "Quit Window" },
     ["<leader>c"] = { "<cmd> Bdelete <CR>", "Close Buffer" },
-
-    -- move text
-    ["<A-j>"] = { "<Esc>:m .+1<CR>==gi", "Move text up" },
-    ["<A-k>"] = { "<Esc>:m .-2<CR>==gi", "Move text down" },
 
     -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
     -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
@@ -54,26 +50,24 @@ M.general = {
   },
 
   v = {
+    -- Stay in indent mode
+    ["<"] = { "<gv", opts = { silent = true } },
+    [">"] = { ">gv", opts = { silent = true } },
+
     ["<A-j>"] = { ":m .+1<CR>==", "Move text up" },
     ["<A-k>"] = { ":m .-2<CR>==", "Move text down" },
-
-    ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
-    ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
-    ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
-    ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
 
     -- Don't copy the replaced text after pasting in visual mode
     -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
     ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', opts = { silent = true } },
 
-    -- Stay in indent mode
-    ["<"] = { "<gv", opts = { silent = true } },
-    [">"] = { ">gv", opts = { silent = true } },
+    ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+    ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
+    ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
+    ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
   },
 
   x = {
-    ["J"] = { ":m '>+1<CR>gv-gv", "" },
-    ["K"] = { ":m '<-2<CR>gv-gv", "" },
     ["<A-j>"] = { ":m '>+1<CR>gv-gv", "Move text up" },
     ["<A-k>"] = { ":m '<-2<CR>gv-gv", "Move text down" },
   },
@@ -84,14 +78,12 @@ M.general = {
 }
 
 M.comment = {
-  -- toggle comment in both modes
   n = {
     ["<leader>/"] = {
       "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>",
       "蘒 Toggle Comment",
     },
   },
-
   v = {
     ["<leader>/"] = {
       "<ESC><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>",
