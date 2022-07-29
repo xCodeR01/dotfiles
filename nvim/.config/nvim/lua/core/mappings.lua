@@ -21,8 +21,8 @@ M.general = {
     ["<C-l>"] = { "<C-w>l", " window right" },
     ["<C-j>"] = { "<C-w>j", " window down" },
     ["<C-k>"] = { "<C-w>k", " window up" },
-    ["<S-l>"] = { ":bnext<CR>", "Buffer right" },
-    ["<S-h>"] = { ":bprevious<CR>", "Buffer left" },
+    ["<S-l>"] = { "<cmd> bnext <cr>", "Buffer right" },
+    ["<S-h>"] = { "<cmd> bprevious <cr>", "Buffer left" },
 
     -- resize window
     ["<C-Up>"] = { ":resize +2<CR>", "Increase window height" },
@@ -98,11 +98,9 @@ M.nvimtree = {
   },
 }
 
-M.lsp = {
+M.mason = {
   n = {
-    ["<leader>l"] = { name = "LSP" },
-    ["<leader>li"] = { "<cmd>LspInfo<cr>", "Info" },
-    ["<leader>lI"] = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
+    ["<leader>m"] = { "<cmd> Mason <cr>", "Mason Info" },
   },
 }
 
@@ -166,15 +164,15 @@ M.gitsigns = {
 M.dap = {
   n = {
     ["<leader>d"] = { name = "DAP" },
-    ["<leader>db"] = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
-    ["<leader>dc"] = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
-    ["<leader>di"] = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
-    ["<leader>do"] = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
-    ["<leader>dO"] = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
-    ["<leader>dr"] = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle REPL" },
-    ["<leader>dl"] = { "<cmd>lua require'dap'.run_last()<cr>", "Run Last" },
-    ["<leader>du"] = { "<cmd>lua require'dapui'.toggle()<cr>", "Toggle DAP UI" },
-    ["<leader>dt"] = { "<cmd>lua require'dap'.terminate()<cr>", "Terminate" },
+    ["<leader>db"] = { "<cmd>lua require 'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
+    ["<leader>dc"] = { "<cmd>lua require 'dap'.continue()<cr>", "Continue" },
+    ["<leader>di"] = { "<cmd>lua require 'dap'.step_into()<cr>", "Step Into" },
+    ["<leader>do"] = { "<cmd>lua require 'dap'.step_over()<cr>", "Step Over" },
+    ["<leader>dO"] = { "<cmd>lua require 'dap'.step_out()<cr>", "Step Out" },
+    ["<leader>dr"] = { "<cmd>lua require 'dap'.repl.toggle()<cr>", "Toggle REPL" },
+    ["<leader>dl"] = { "<cmd>lua require 'dap'.run_last()<cr>", "Run Last" },
+    ["<leader>dt"] = { "<cmd>lua require 'dap'.terminate()<cr>", "Terminate" },
+    ["<leader>du"] = { "<cmd>lua require 'dapui'.toggle()<cr>", "Toggle DAP UI" },
   },
 }
 
@@ -199,6 +197,12 @@ M.terminal = {
     ["<leader>tf"] = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
     ["<leader>th"] = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
     ["<leader>tv"] = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+  },
+}
+
+M.auto_session = {
+  n = {
+    ["<leader>r"] = { "<cmd> RestoreSession <cr>", "Restore Session" },
   },
 }
 

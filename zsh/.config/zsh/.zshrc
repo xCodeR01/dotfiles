@@ -17,7 +17,8 @@ source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
-bindkey '^ ' autosuggest-accept
+# press ctrl-l to complete auto-suggestion
+bindkey '^l' autosuggest-accept
 
 # Syntax highlighting for custom patterns 
 typeset -A ZSH_HIGHLIGHT_PATTERNS

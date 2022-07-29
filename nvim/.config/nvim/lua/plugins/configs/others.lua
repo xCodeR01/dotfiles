@@ -109,8 +109,27 @@ M.luasnip = function()
   })
 end
 
+M.onedark = function()
+  local onedark = require "onedark"
+
+  onedark.setup {
+    style = "darker",
+    transparent = false,
+    toggle_style_key = nil,
+
+    -- plugins config --
+    diagnostics = {
+      darker = true,
+      undercurl = true,
+      background = true,
+    },
+  }
+
+  onedark.load()
+end
+
 M.copilot = function()
-  vim.api.nvim_set_keymap("i", "<C-l>", "copilot#Accept()", { silent = true, expr = true })
+  vim.api.nvim_set_keymap("i", "<C-l>", "copilot#Accept('<CR>')", { silent = true, expr = true })
   vim.g.copilot_no_tab_map = true
   vim.g.copilot_filetypes = {
     ["markdown"] = false,

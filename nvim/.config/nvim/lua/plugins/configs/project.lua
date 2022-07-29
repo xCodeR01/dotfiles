@@ -8,7 +8,7 @@ project.setup {
   active = true,
   on_config_done = nil,
   manual_mode = false,
-  detection_methods = { "pattern" },
+  detection_methods = { "pattern", "lsp" },
   patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "Pipfile" },
   show_hidden = false,
   silent_chdir = true,

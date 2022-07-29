@@ -25,8 +25,7 @@ local mode = {
 }
 
 local branch = {
-  "branch",
-  icons_enabled = true,
+  "b:gitsigns_head",
   icon = "",
 }
 
@@ -35,15 +34,17 @@ local diagnostics = {
   sources = { "nvim_diagnostic" },
   sections = { "error", "warn" },
   symbols = { error = " ", warn = " " },
-  colored = false,
-  update_in_insert = false,
-  always_visible = true,
 }
 
 local diff = {
   "diff",
   colored = false,
-  symbols = { added = " ", modified = " ", removed = " " },
+  symbols = { added = "  ", modified = " ", removed = " " },
+  diff_color = {
+    added = { fg = "#98be65" },
+    modified = { fg = "#ECBE7B" },
+    removed = { fg = "#ec5f67" },
+  },
   cond = conditions.buffer_not_empty,
 }
 

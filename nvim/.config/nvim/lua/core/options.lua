@@ -37,16 +37,12 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
-vim.opt.fillchars.eob = " "
-vim.opt.shortmess:append "c"
+-- vim.opt.iskeyword:append "-"
+vim.opt.shortmess:append "csI"
 vim.opt.whichwrap:append "<>[]hl"
-vim.opt.iskeyword:append "-"
 
--- some global options
-vim.g.did_load_filetypes = 0
-vim.g.do_filetype_lua = 1
+-- set 'space' as leader key
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 
 -- disable some builtin vim plugins
 local default_plugins = {

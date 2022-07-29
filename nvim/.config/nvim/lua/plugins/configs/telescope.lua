@@ -7,11 +7,12 @@ local actions = require "telescope.actions"
 
 telescope.setup {
   defaults = {
-    color_devicons = true,
     prompt_prefix = " ",
     selection_caret = " ",
     path_display = { "smart" },
-    file_ignore_patterns = { "^.git/", "^build/" },
+    file_ignore_patterns = {},
+    color_devicons = true,
+    set_env = { ["COLORTERM"] = "truecolor" },
     mappings = {
       i = {
         ["<Down>"] = actions.cycle_history_next,
@@ -85,12 +86,11 @@ telescope.setup {
     find_files = {
       hidden = true,
     },
+    live_grep = {
+      only_sort_text = true,
+    },
   },
   extensions = {
-    media_files = {
-      filetypes = { "png", "webp", "jpg", "jpeg" },
-      find_cmd = "fd",
-    },
     fzf = {
       fuzzy = true,
       override_generic_sorter = true,
@@ -100,10 +100,6 @@ telescope.setup {
   },
 }
 
-local extensions_list = { "media_files", "fzf" }
-
 pcall(function()
-  for _, ext in ipairs(extensions_list) do
-    telescope.load_extension(ext)
-  end
+  telescope.load_extension "fzf"
 end)

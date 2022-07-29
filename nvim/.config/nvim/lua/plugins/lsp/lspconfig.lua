@@ -7,6 +7,7 @@ require "ui.lsp"
 
 local lsp_mappings = {
   n = {
+    ["<leader>l"] = { name = "LSP" },
     -- lspsaga integration
     ["gh"] = { "<cmd>Lspsaga lsp_finder<CR>", "LSP finder" },
     ["K"] = { "<cmd>Lspsaga hover_doc<CR>", "Hover doc" },
@@ -17,13 +18,13 @@ local lsp_mappings = {
     ["gr"] = { "<cmd>Lspsaga rename<CR>", "LSP rename" },
     ["[d"] = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Goto prev diagnostic" },
     ["]d"] = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "Goto next diagnostic" },
-    ["<C-u>"] = {
-      "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(2)",
-      "Scroll up in saga",
+    ["<C-f>"] = {
+      "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>",
+      "Scroll forward in saga",
     },
-    ["<C-d>"] = {
-      "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-2)",
-      "Scroll down in saga",
+    ["<C-b>"] = {
+      "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>",
+      "Scroll backward in saga",
     },
     ["<leader>la"] = { "<cmd>Lspsaga code_action<CR>", "Code Actions" },
     -- built-in lsp
@@ -46,6 +47,8 @@ local lsp_mappings = {
 local function on_attach(client, bufnr)
   client.resolved_capabilities.document_formatting = false
   client.resolved_capabilities.document_range_formatting = false
+  -- client.server_capabilities.documentFormattingProvider = false
+  -- client.server_capabilities.documentRangeFormattingProvider = false
 
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
@@ -87,11 +90,11 @@ lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_c
   capabilities = capabilities,
 })
 
-local lsp_installer = require "nvim-lsp-installer"
-local server_opts = require "lsp.server-opts"
+local lsp_servers = { "sumneko_lua", "tsserver", "jsonls" }
+local server_opts = require "plugins.lsp.server-opts"
 
 -- init lsp servers with custom opts if available
-for _, server in ipairs(lsp_installer.get_installed_servers()) do
-  local opts = server_opts[server.name] or {}
-  lspconfig[server.name].setup(opts)
+for _, server_name in ipairs(lsp_servers) do
+  local opts = server_opts[server_name] or {}
+  lspconfig[server_name].setup(opts)
 end
