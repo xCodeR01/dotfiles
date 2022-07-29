@@ -244,14 +244,14 @@ local function plugins(use)
     config = function()
       require("plugins.configs.others").onedark()
     end,
-    disable = true,
+    disable = false,
   }
   use {
     "morhetz/gruvbox",
     config = function()
       vim.cmd [[colorscheme gruvbox]]
     end,
-    disable = false,
+    disable = true,
   }
 
   -- extra stuff

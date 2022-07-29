@@ -3,6 +3,7 @@ if not present then
   return
 end
 
+require "ui.highlights".nvim_tree()
 local diag_icons = require("ui.icons").diagnostics
 
 -- docs => https://github.com/kyazdani42/nvim-tree.lua#setup
