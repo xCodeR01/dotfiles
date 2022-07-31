@@ -80,6 +80,7 @@ telescope.setup {
     "--column",
     "--smart-case",
     "--hidden",
+    "--glob=!.git/",
   },
   -- make sure rg and fd are available, as they honor .gitignore
   pickers = {

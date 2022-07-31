@@ -1,7 +1,6 @@
 -- core setup
 require "core.autocmds"
 require "core.options"
-require "ui.highlights"
 
 vim.defer_fn(function()
   local mappings = require "core.mappings"

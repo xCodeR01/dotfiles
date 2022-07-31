@@ -1,6 +1,4 @@
 local M = {}
-local api = vim.api
-
 local merge_tb = vim.tbl_deep_extend
 
 M.load_mappings = function(mappings, mapping_opt)
@@ -75,47 +73,6 @@ M.packer_sync = function(...)
     packer.sync(...)
   else
     error "Packer could not be loaded!"
-  end
-end
-
-M.bufilter = function()
-  local bufs = vim.t.bufs
-
-  for i = #bufs, 1, -1 do
-    if not vim.api.nvim_buf_is_valid(bufs[i]) then
-      table.remove(bufs, i)
-    end
-  end
-
-  return bufs
-end
-
-M.close_buffer = function(bufnr)
-  if vim.bo.buftype == "terminal" then
-    vim.cmd(vim.bo.buflisted and "set nobl | enew" or "hide")
-  elseif vim.bo.modified then
-    print "save the file bruh"
-  else
-    bufnr = bufnr or api.nvim_get_current_buf()
-    require("core.utils").tabuflinePrev()
-    vim.cmd("bd" .. bufnr)
-  end
-end
-
--- closes tab + all of its buffers
-M.close_all_bufs = function(action)
-  local bufs = vim.t.bufs
-
-  if action == "closeTab" then
-    vim.cmd "tabclose"
-  end
-
-  for _, buf in ipairs(bufs) do
-    M.close_buffer(buf)
-  end
-
-  if action ~= "closeTab" then
-    vim.cmd "enew"
   end
 end
 

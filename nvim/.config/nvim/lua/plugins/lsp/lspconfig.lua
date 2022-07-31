@@ -90,7 +90,14 @@ lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_c
   capabilities = capabilities,
 })
 
-local lsp_servers = { "sumneko_lua", "tsserver", "jsonls" }
+local lsp_servers = {
+  "sumneko_lua",
+  "tsserver",
+  "jsonls",
+  "solang",
+  "rust_analyzer",
+  "pyright",
+}
 local server_opts = require "plugins.lsp.server-opts"
 
 -- init lsp servers with custom opts if available
