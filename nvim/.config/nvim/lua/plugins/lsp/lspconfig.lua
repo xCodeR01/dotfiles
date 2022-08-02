@@ -92,8 +92,9 @@ lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_c
 
 local lsp_servers = {
   "sumneko_lua",
-  "tsserver",
   "jsonls",
+  "tsserver",
+  "graphql",
   "solang",
   "rust_analyzer",
   "pyright",

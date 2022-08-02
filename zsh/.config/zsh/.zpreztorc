@@ -1,6 +1,7 @@
 ### load useful modules
 zstyle ':prezto:load' pmodule \
   'environment' \
+  'editor' \
   'git' \
   'history' \
   'utility' \
@@ -17,6 +18,7 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
   'main' \
   'brackets' \
   'pattern' \
+
 ### configure prompt
 zstyle ':prezto:module:prompt' theme 'powerlevel10k'
 
@@ -26,6 +28,8 @@ zstyle ':prezto:module:completion:*:hosts' etc-host-ignores \
  
 ### configure autosuggestions
 zstyle ':prezto:module:autosuggestions' color 'yes'
+
+zstyle ':prezto:module:editor' key-bindings 'vi'
 
 zstyle ':prezto:module:terminal' auto-title 'yes'
 zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'

@@ -50,7 +50,7 @@ nvim_tree.setup {
     },
   },
   renderer = {
-    group_empty = false,
+    group_empty = true,
     highlight_git = true,
     icons = {
       webdev_colors = true,
